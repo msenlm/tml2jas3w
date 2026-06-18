@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html id="top" class="no-js overflow-x-hidden" lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[PROTOTYPE] Trademark &amp; Brand Usage — Lightmatter</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Tailwind with custom config matching lightmatter.co -->
+  <script src="assets/tailwind.js"></script>
+  <!-- Alpine.js for nav dropdowns -->
+  <script defer src="assets/alpine.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            red:     { 500: '#FF3300', 600: '#E62E00' },
+            cyan:    { 500: '#00E7E7' },
+            blue:    { 500: '#0033FF' },
+            purple:  { 500: '#7300FF' },
+            magenta: { 500: '#FF00DB' },
+            gray: {
+              900: '#000000', // Black
+              700: '#333333', // Very Dark
+              600: '#333333', // Very Dark
+              500: '#757575', // Extra Dark (also used unofficially for logos)
+              400: '#BBBBBB', // Dark
+              300: '#D4D4D4', // Medium
+              200: '#EEEEEE', // Light
+              100: '#F9F9F9', // Super Light
+            },
+          },
+          fontFamily: {
+            sans: ['"Object Sans"', '"Inter"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+            display: ['"Inference Sans"', '"Impact"', '"Arial Narrow"', 'sans-serif'],
+          },
+          fontSize: {
+            '6xl': ['95px', { lineHeight: '1', letterSpacing: '-3.8px' }],
+            '5xl': ['76px', { lineHeight: '1.1', letterSpacing: '-3.04px' }],
+            '4xl': ['61px', { lineHeight: '1.1', letterSpacing: '-2.44px' }],
+            '2xl': ['39px', { lineHeight: '1.1', letterSpacing: '-0.78px' }],
+            xl:   ['31px', { lineHeight: '1.1', letterSpacing: '-0.31px' }],
+            lg:   ['25px', { lineHeight: '1.4' }],
+            base: ['16px', { lineHeight: '1.4' }],
+            sm:   ['14px', { lineHeight: '1.2' }],
+            xs:   ['12px', { lineHeight: '1.4' }],
+          },
+          spacing: {
+            'header': '75px',
+            'side': '182px',
+          },
+          height: {
+            'header': '75px',
+          },
+          inset: {
+            'header': '75px',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Inference Sans';
+      src: url('assets/fonts/Inference_Sans.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'Object Sans';
+      src: url('assets/fonts/ObjectSans-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Object Sans';
+      src: url('assets/fonts/ObjectSans-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* Custom classes that mirror lightmatter.co's compiled CSS */
+    .container-fluid {
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    @media (min-width: 768px) {
+      .container-fluid { padding-left: 48px; padding-right: 48px; }
+    }
+    @media (min-width: 1024px) {
+      .container-fluid { padding-left: 96px; padding-right: 96px; }
+    }
+    @media (min-width: 1280px) {
+      .container-fluid { padding-left: 182px; padding-right: 182px; }
+    }
+    .nav-link {
+      font-size: 16px;
+      letter-spacing: 0.56px;
+      line-height: 1;
+      color: #111111;
+      text-decoration: none;
+    }
+    .nav-link:hover { color: #ff3300; }
+    .top-header { top: 75px; }
+
+    /* Inference Sans stylistic alternates — toggled by the type animation */
+    .stylistic-alt { font-feature-settings: 'salt' 1; }
+
+    html { scroll-behavior: smooth; }
+
+    /* Section reveal experiment — scoped under html.reveal-mode, zero default impact */
+    html.reveal-mode .lm-reveal > * > * {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+      will-change: opacity, transform;
+    }
+    html.reveal-mode .lm-reveal.is-in > * > * { opacity: 1; transform: none; }
+    html.reveal-mode .lm-reveal.is-in > * > *:nth-child(2) { transition-delay: .09s; }
+    html.reveal-mode .lm-reveal.is-in > * > *:nth-child(3) { transition-delay: .18s; }
+    html.reveal-mode .lm-reveal.is-in > * > *:nth-child(4) { transition-delay: .27s; }
+    html.reveal-mode .lm-reveal.is-in > * > *:nth-child(5) { transition-delay: .36s; }
+    html.reveal-mode .lm-reveal.is-in > * > *:nth-child(6) { transition-delay: .45s; }
+    @media (prefers-reduced-motion: reduce) {
+      html.reveal-mode .lm-reveal > * > * { transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+    /* Element reveal experiment — scoped under html.element-reveal-mode, zero default impact */
+    html.element-reveal-mode .lm-item {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+      transition: opacity .55s cubic-bezier(.2,.7,.2,1), transform .55s cubic-bezier(.2,.7,.2,1);
+      will-change: opacity, transform;
+    }
+    html.element-reveal-mode .lm-item.is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html.element-reveal-mode .lm-item { transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+    [x-cloak] { display: none !important; }
+
+    /* Dark mode overrides — html.dark specificity (0,2,0) beats Tailwind (0,1,0) */
+    html.dark body                   { background-color: #000 !important; color: #e5e5e5; }
+    html.dark header                 { background-color: #000 !important; border-bottom-color: #333; }
+    html.dark .bg-white              { background-color: #000 !important; }
+    html.dark .bg-gray-100           { background-color: #000 !important; }
+    html.dark main > *               { border-top: 1px solid #333; }
+    html.dark main > *:first-child   { border-top: none; }
+    html.dark main > *.border-b      { border-bottom-color: transparent; }
+    html.dark footer                 { border-top: 1px solid #333; }
+    html.dark .bg-gray-300           { background-color: #333; }
+    html.dark .text-gray-900         { color: #e5e5e5; }
+    html.dark .text-gray-700         { color: #ccc; }
+    html.dark .text-gray-600         { color: #999; }
+    html.dark .text-gray-500         { color: #8a8a8a; }
+    html.dark .border-gray-300       { border-color: #2a2a2a; }
+    html.dark .border-gray-900       { border-color: #444; }
+    html.dark .border-b              { border-bottom-color: #2a2a2a; }
+    html.dark .border-t              { border-top-color: #2a2a2a; }
+    html.dark .border-b-2            { border-bottom-color: #2a2a2a; }
+    html.dark .border-t-2            { border-top-color: #2a2a2a; }
+    html.dark .border-l              { border-left-color: #2a2a2a; }
+    html.dark .nav-link              { color: #fff; }
+    html.dark .nav-link:hover        { color: #FF3300; }
+    html.dark .hover\:text-red-500:hover { color: #FF3300 !important; }
+    html.dark .lm-card               { background-color: #0d0d0d !important; border-color: #2a2a2a !important; }
+
+    /* Hamburger icon swap */
+    .navbar-toggle .icon-open { display: none; }
+    .navbar-toggle .icon-closed { display: block; }
+    .navbar-toggle.is-open .icon-open { display: block; }
+    .navbar-toggle.is-open .icon-closed { display: none; }
+  </style>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen font-sans bg-white text-gray-900">
+
+  <!-- ── Nav ──────────────────────────────────────────────────────────────── -->
+  <header class="fixed left-0 right-0 top-0 z-50 h-header border-b border-gray-300 bg-white">
+    <div class="container-fluid h-full">
+      <div class="h-full flex items-center justify-between">
+
+        <!-- Logo -->
+        <a class="block w-[56px] shrink-0" href="https://lightmatter.co" rel="home">
+          <img width="56" height="28" src="assets/images/logo-lm.svg" alt="Lightmatter">
+        </a>
+
+        <!-- Desktop nav -->
+        <nav id="nav-main" class="lg:h-full nav-main hidden lg:block" role="navigation" aria-label="Main">
+          <ul class="h-full flex items-stretch">
+
+            <!-- Products -->
+            <li class="nav-item flex items-stretch relative"
+                x-data="{ open: false, showTimeout: null, hideTimeout: null }"
+                x-bind:class="{ 'active': open }"
+                @mouseenter="clearTimeout(hideTimeout); showTimeout = setTimeout(() => open = true, 100)"
+                @mouseleave="clearTimeout(showTimeout); hideTimeout = setTimeout(() => open = false, 150)"
+                @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) open = false })"
+                @keydown.escape="open = false; $el.querySelector('.nav-link').focus()">
+              <a href="https://lightmatter.co/products/"
+                 class="nav-link flex lg:px-3 xl:px-5 items-center transition-colors duration-200"
+                 x-bind:class="{ 'text-red-500': open }"
+                 aria-haspopup="true"
+                 x-bind:aria-expanded="open.toString()"
+                 @keydown.arrow-down.prevent="open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())"
+                 @keydown.enter="if (!open) { $event.preventDefault(); open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus()) }"
+                 @keydown.space.prevent="open = !open; if (open) $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())">
+                <span class="label">Products</span>
+              </a>
+              <div class="mega-dropdown fixed left-0 right-0 top-header w-screen border-b border-gray-300"
+                   role="region" aria-label="Products submenu"
+                   x-show="open" x-cloak>
+                <div class="bg-white w-full">
+                  <div class="container-fluid flex w-full justify-between gap-10 py-14">
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/products/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Platform Overview</h3>
+                      </a>
+                      <ul class="mt-6 space-y-5 border-l border-red-500 pl-6">
+                        <li><a href="https://lightmatter.co/products/passage/"       class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Interconnects</a></li>
+                        <li><a href="https://lightmatter.co/products/guide/"         class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">VLSP Light Engine</a></li>
+                        <li><a href="https://lightmatter.co/products/vclick-optics/" class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">vClick dFAU</a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/products/passage/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Passage Interconnects</h3>
+                      </a>
+                      <ul class="mt-6 space-y-5 border-l border-red-500 pl-6">
+                        <li><a href="https://lightmatter.co/products/l200/"         class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Passage L200</a></li>
+                        <li><a href="https://lightmatter.co/products/passage-l20/"  class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Passage L20</a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/products/guide/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Guide VLSP Light Engine</h3>
+                      </a>
+                      <ul class="mt-6 space-y-5 border-l border-red-500 pl-6">
+                        <li><a href="https://lightmatter.co/products/guide-1/" class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Guide 1</a></li>
+                        <li><a href="https://lightmatter.co/products/guide-dr/" class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Guide DR</a></li>
+                      </ul>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/products/passage-m1000-evk/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Reference Systems</h3>
+                      </a>
+                      <ul class="mt-6 space-y-5 border-l border-red-500 pl-6">
+                        <li><a href="https://lightmatter.co/products/passage-m1000-evk/" class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Passage M1000 EVK</a></li>
+                        <li><a href="https://lightmatter.co/products/passage-evk100/"    class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Passage EVK100</a></li>
+                        <li><a href="https://lightmatter.co/products/passage-evk50/"     class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Passage EVK50</a></li>
+                        <li><a href="https://lightmatter.co/products/guide-1/"           class="block text-base font-normal tracking-[0.56px] text-gray-900 hover:text-red-500 transition-colors">Guide 1 EVK</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Media -->
+            <li class="nav-item flex items-stretch relative"
+                x-data="{ open: false, showTimeout: null, hideTimeout: null }"
+                x-bind:class="{ 'active': open }"
+                @mouseenter="clearTimeout(hideTimeout); showTimeout = setTimeout(() => open = true, 100)"
+                @mouseleave="clearTimeout(showTimeout); hideTimeout = setTimeout(() => open = false, 150)"
+                @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) open = false })"
+                @keydown.escape="open = false; $el.querySelector('.nav-link').focus()">
+              <a href="https://lightmatter.co/news/"
+                 class="nav-link flex lg:px-3 xl:px-5 items-center transition-colors duration-200"
+                 x-bind:class="{ 'text-red-500': open }"
+                 aria-haspopup="true"
+                 x-bind:aria-expanded="open.toString()"
+                 @keydown.arrow-down.prevent="open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())"
+                 @keydown.enter="if (!open) { $event.preventDefault(); open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus()) }"
+                 @keydown.space.prevent="open = !open; if (open) $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())">
+                <span class="label">Media</span>
+              </a>
+              <div class="mega-dropdown fixed left-0 right-0 top-header w-screen border-b border-gray-300"
+                   role="region" aria-label="Media submenu"
+                   x-show="open" x-cloak>
+                <div class="bg-white w-full">
+                  <div class="container-fluid flex w-full justify-between gap-10 py-14">
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/press-releases/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Press Releases</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/news/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">News</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/blog/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Blog</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/knowledge-hub/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Knowledge Hub</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/resources/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Resources</h3>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Company -->
+            <li class="nav-item flex items-stretch relative"
+                x-data="{ open: false, showTimeout: null, hideTimeout: null }"
+                x-bind:class="{ 'active': open }"
+                @mouseenter="clearTimeout(hideTimeout); showTimeout = setTimeout(() => open = true, 100)"
+                @mouseleave="clearTimeout(showTimeout); hideTimeout = setTimeout(() => open = false, 150)"
+                @focusout="$nextTick(() => { if (!$el.contains(document.activeElement)) open = false })"
+                @keydown.escape="open = false; $el.querySelector('.nav-link').focus()">
+              <a href="https://lightmatter.co/about/"
+                 class="nav-link flex lg:px-3 xl:px-5 items-center transition-colors duration-200"
+                 x-bind:class="{ 'text-red-500': open }"
+                 aria-haspopup="true"
+                 x-bind:aria-expanded="open.toString()"
+                 @keydown.arrow-down.prevent="open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())"
+                 @keydown.enter="if (!open) { $event.preventDefault(); open = true; $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus()) }"
+                 @keydown.space.prevent="open = !open; if (open) $nextTick(() => $el.closest('.nav-item').querySelector('.mega-dropdown a').focus())">
+                <span class="label">Company</span>
+              </a>
+              <div class="mega-dropdown fixed left-0 right-0 top-header w-screen border-b border-gray-300"
+                   role="region" aria-label="Company submenu"
+                   x-show="open" x-cloak>
+                <div class="bg-white w-full">
+                  <div class="container-fluid flex w-full justify-between gap-10 py-14">
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/about/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">About</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/vision/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Vision</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/events/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Events</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/people/careers/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Careers</h3>
+                      </a>
+                    </div>
+                    <div class="dropdown-column">
+                      <a href="https://lightmatter.co/contact-us/" class="block group/link">
+                        <h3 class="text-[20px] leading-[1.1] font-normal text-gray-900 group-hover/link:text-red-500 transition-colors">Contact</h3>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- Hamburger (mobile) -->
+        <button class="navbar-toggle lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none"
+                aria-expanded="false" aria-controls="mobile-menu"
+                onclick="this.classList.toggle('is-open'); document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-expanded', this.classList.contains('is-open'));">
+          <span class="sr-only">Open main menu</span>
+          <svg class="icon-closed h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linejoin="round" stroke-width="2" d="M4 6h20M4 14h20"/>
+          </svg>
+          <div class="icon-open h-5 w-5">
+            <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0921 9.67785L19.2237 17.8095L17.8095 19.2237L9.67785 11.0921L1.54605 19.2239L0.131836 17.8097L8.26364 9.67785L0.131838 1.54605L1.54605 0.131836L9.67785 8.26364L17.8095 0.131981L19.2237 1.54619L11.0921 9.67785Z"/>
+            </svg>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden fixed top-header left-0 right-0 bottom-0 bg-white z-40 overflow-y-auto" role="navigation" aria-label="Mobile">
+      <div class="container-fluid pt-8 pb-5">
+        <ul class="space-y-6">
+          <li class="mobile-nav-item">
+            <a href="https://lightmatter.co/products/" class="block text-xl font-medium uppercase tracking-wide text-gray-900">Products</a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="https://lightmatter.co/news/" class="block text-xl font-medium uppercase tracking-wide text-gray-900">Media</a>
+          </li>
+          <li class="mobile-nav-item">
+            <a href="https://lightmatter.co/about/" class="block text-xl font-medium uppercase tracking-wide text-gray-900">Company</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </header>
+
+  <main class="flex-1 pt-header">
+
+    <!-- ── Hero + Marks ──────────────────────────────────────────────────── -->
+    <section class="bg-white">
+      <div class="container-fluid py-16 md:py-24 xl:py-32 flex flex-col gap-12">
+        <div class="flex flex-col gap-8">
+          <p class="lm-item text-xs font-medium uppercase text-red-500">Brand &amp; Legal Guidelines</p>
+          <h1 id="tm-headline" class="lm-item font-display font-normal text-[44px] lg:text-5xl xl:text-6xl animate-type">TRADEMARK &amp;<br>BRAND USAGE</h1>
+          <div class="lm-item flex flex-col gap-4 max-w-[720px]">
+            <p class="text-[20px] leading-[1.4]">
+              Trademark symbols show that a name is a Lightmatter trademark and help protect our brand from misuse. The <sup>&reg;</sup> symbol marks a registered trademark, and the <sup>&trade;</sup> symbol marks an unregistered one.
+            </p>
+            <p class="text-[20px] leading-[1.4]">
+              They provide notice but are not legally required in every instance. The notice can strengthen our rights if we ever need to enforce a mark, so we mark the first prominent use and let the attribution line cover the rest.
+            </p>
+            <p class="text-[20px] leading-[1.4]">
+              Below is a non-exhaustive list of Lightmatter trademarks.
+            </p>
+          </div>
+        </div>
+
+        <div id="marks-rows" class="lm-item">
+          <!-- Lightmatter (registered) -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Lightmatter<sup>&reg;</sup></span>
+            <span class="text-gray-900">Company / brand</span>
+          </div>
+          <!-- LM logo -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">LM logo<sup>&reg;</sup></span>
+            <span class="text-gray-900">Logo</span>
+          </div>
+          <!-- Idiom -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Idiom<sup>&trade;</sup></span>
+            <span class="text-gray-900">Software platform</span>
+          </div>
+          <!-- Guide (registered) -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Guide<sup>&reg;</sup></span>
+            <span class="text-gray-900">Photonic networking platform</span>
+          </div>
+          <!-- Passage (registered) -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Passage<sup>&reg;</sup></span>
+            <span class="text-gray-900">Photonic interconnect</span>
+          </div>
+          <!-- Envise -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Envise<sup>&trade;</sup></span>
+            <span class="text-gray-900">Photonic AI accelerator</span>
+          </div>
+          <!-- Edgeless I/O -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Edgeless I/O<sup>&trade;</sup></span>
+            <span class="text-gray-900">Interconnect architecture</span>
+          </div>
+          <!-- eClick -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">eClick<sup>&trade;</sup></span>
+            <span class="text-gray-900">Fiber attach technology</span>
+          </div>
+          <!-- vClick -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">vClick<sup>&trade;</sup></span>
+            <span class="text-gray-900">Fiber attach technology</span>
+          </div>
+          <!-- A Giant Leap -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">A Giant Leap<sup>&trade;</sup></span>
+            <span class="text-gray-900">Slogan</span>
+          </div>
+          <!-- Passagelink -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">Passagelink<sup>&trade;</sup></span>
+            <span class="text-gray-900">Optical interconnect link</span>
+          </div>
+          <!-- VLSP -->
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-center py-5 border-t-2 border-gray-300 text-[20px] leading-[1.4]">
+            <span class="font-medium w-full sm:w-[320px] sm:shrink-0">VLSP<sup>&trade;</sup></span>
+            <span class="text-gray-900">Photonics architecture</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Using the Marks (rules + when to show the symbol) ─────────────── -->
+    <section class="bg-gray-100">
+      <div class="container-fluid py-16 md:py-24 xl:py-32 flex flex-col gap-12">
+        <div class="lm-item flex flex-col gap-5 max-w-[794px]">
+          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Using the marks</h2>
+          <p class="text-[20px] leading-[1.4]">Two rules cover almost everything. Then it&rsquo;s just where the symbol goes: mark the first or most prominent use, skip it after that, and add the attribution line somewhere in the piece.</p>
+          <p class="text-[20px] leading-[1.4]">Always use a trademark as an adjective that modifies a noun, never as a noun or verb. On first use, pair it with a product or technology name (for example, &ldquo;Passage<sup>&reg;</sup> interconnect&rdquo;); after that, it may be used on its own.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Rule 01 -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-3 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Rule 01</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Mark the first instance</h3>
+            <p class="text-base text-gray-900 leading-[1.4]">Mark the first or most prominent use of a trademark, then drop the symbol on every use after that in the same piece.</p>
+          </div>
+
+          <!-- Rule 02 -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-3 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Rule 02</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Add the attribution line</h3>
+            <p class="text-base text-gray-900 leading-[1.4]">Include the approved attribution line once per piece, in the footer, closing slide, or product docs. It names every Lightmatter trademark in one place.</p>
+          </div>
+
+          <!-- Logos -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-4 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Logos</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Lightmatter logo</h3>
+            <ul class="flex flex-col gap-3 text-base text-gray-900 leading-[1.4]">
+              <li>Keep the LM logo and Lightmatter logo clean everywhere, including the site header, footers, and slide masters.</li>
+              <li>Logos generally do not require a <sup>&reg;</sup> or <sup>&trade;</sup> symbol. The attribution line provides trademark notice.</li>
+            </ul>
+          </div>
+
+          <!-- Slides -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-4 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Slides</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Presentations</h3>
+            <ul class="flex flex-col gap-3 text-base text-gray-900 leading-[1.4]">
+              <li>Mark each mark&rsquo;s first use, usually on the title or first content slide. Don&rsquo;t repeat it after.</li>
+              <li>Mark a standalone slide too, if it might be shared on its own.</li>
+              <li>Put the attribution line on a closing legal slide.</li>
+            </ul>
+          </div>
+
+          <!-- Website -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-4 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Website</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Web pages</h3>
+            <ul class="flex flex-col gap-3 text-base text-gray-900 leading-[1.4]">
+              <li>Mark the first use on each page. No symbol after that.</li>
+              <li>Skip nav items and repeated headings; mark the first prominent body or hero use.</li>
+              <li>Keep the attribution line in the global footer.</li>
+            </ul>
+          </div>
+
+          <!-- Engravings -->
+          <div class="lm-item lm-card border border-gray-300 p-8 flex flex-col gap-4 bg-white">
+            <span class="text-xs font-medium uppercase text-red-500">Product</span>
+            <h3 class="font-sans font-normal text-xl tracking-[-1px] leading-[1.1]">Engravings &amp; packaging</h3>
+            <ul class="flex flex-col gap-3 text-base text-gray-900 leading-[1.4]">
+              <li>The symbol is optional on the product itself. Leave it off a large engraving or packaging title if it clutters the design.</li>
+              <li>The attribution line on the packaging, datasheet, or docs provides the notice.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Quick reference ───────────────────────────────────────────────── -->
+    <section class="bg-white">
+      <div class="container-fluid py-16 md:py-24 xl:py-32 flex flex-col gap-8">
+        <h2 class="lm-item font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Quick reference</h2>
+        <div id="ref-rows" class="lm-item">
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-start py-5 border-t-2 border-gray-300 text-base leading-[1.4]">
+            <span class="font-medium w-full sm:w-[200px] sm:shrink-0 text-[20px]">Logos</span>
+            <span class="flex-1 text-gray-900">No symbol on logos. The attribution line covers them.</span>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-start py-5 border-t-2 border-gray-300 text-base leading-[1.4]">
+            <span class="font-medium w-full sm:w-[200px] sm:shrink-0 text-[20px]">Slides</span>
+            <span class="flex-1 text-gray-900">Mark the first or most prominent slide per deck. Attribution line on a closing legal slide.</span>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-start py-5 border-t-2 border-gray-300 text-base leading-[1.4]">
+            <span class="font-medium w-full sm:w-[200px] sm:shrink-0 text-[20px]">Website</span>
+            <span class="flex-1 text-gray-900">Mark the first use per page. Attribution line in the global footer.</span>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-7 sm:items-start py-5 border-t-2 border-gray-300 text-base leading-[1.4]">
+            <span class="font-medium w-full sm:w-[200px] sm:shrink-0 text-[20px]">Product</span>
+            <span class="flex-1 text-gray-900">Optional on the product. The attribution line on packaging, datasheet, or docs provides the notice.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Attribution line ──────────────────────────────────────────────── -->
+    <section class="bg-gray-100">
+      <div class="container-fluid py-16 md:py-24 xl:py-32 flex flex-col gap-12">
+        <div class="lm-item flex flex-col gap-5 max-w-[794px]">
+          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">The attribution line</h2>
+        </div>
+
+        <!-- Approved line, set off by a single rule -->
+        <div class="lm-item flex flex-col gap-5 max-w-[1000px]">
+          <blockquote id="attr-line" class="border-l-2 border-red-500 pl-6 md:pl-8 text-[25px] leading-[1.3] text-gray-900" style="text-wrap: pretty;">
+            Lightmatter, the LM logo, Idiom, Guide, Passage, Envise, Edgeless I/O, eClick, vClick, A Giant Leap, Passagelink, and VLSP are all trademarks of Lightmatter,&nbsp;Inc.
+          </blockquote>
+          <button type="button" onclick="copyAttribution(this)"
+                  class="self-start inline-flex items-center gap-2 border border-gray-900 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="copy-label">Copy</span>
+          </button>
+        </div>
+
+        <!-- Two-column prose -->
+        <div class="lm-item grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+          <div class="flex flex-col gap-3 max-w-[440px]">
+            <h3 class="font-sans font-normal text-lg leading-[1.2]">In the United States</h3>
+            <p class="text-base text-gray-900 leading-[1.4]">Use the <sup>&reg;</sup> or <sup>&trade;</sup> symbol on the first prominent use, as shown above.</p>
+          </div>
+          <div class="flex flex-col gap-3 max-w-[440px]">
+            <h3 class="font-sans font-normal text-lg leading-[1.2]">Outside the United States</h3>
+            <p class="text-base text-gray-900 leading-[1.4]">Trademark symbols are often omitted. Use the attribution line instead.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="bg-gray-900 text-white relative">
+    <!-- Back to top -->
+    <a href="#top" class="absolute right-0 top-20 size-[68px] p-4 bg-red-500 hover:bg-red-600 transition-colors duration-300 flex justify-center items-center">
+      <svg width="43" height="36" viewBox="0 0 43 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.965 0.897184L14.535 0.897185L0.0849966 35.7472L6.63 35.7472L20.145 3.10718L22.355 3.10718L35.87 35.7472L42.415 35.7472L27.965 0.897184Z" fill="white"/>
+      </svg>
+    </a>
+
+    <div class="container-fluid py-20 flex flex-col gap-[102px]">
+
+      <!-- Top row -->
+      <div class="flex flex-col md:flex-row items-start justify-between w-full gap-10 md:gap-0">
+        <div class="flex flex-col gap-4 w-[307px]">
+          <a href="https://lightmatter.co" class="block w-[56px]">
+            <img src="assets/images/logo-lm-white.svg" alt="Lightmatter" width="56" height="28">
+          </a>
+          <p class="text-sm font-medium tracking-[0.49px] leading-[1.2]">The Photonic (Super)computer Company</p>
+          <p class="text-sm font-medium tracking-[0.49px] leading-[1.2] text-gray-300">
+            250 Bryant Street<br>
+            Mountain View, CA 94041
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-10 gap-y-10 md:gap-x-[60px] md:gap-y-12 lg:flex lg:flex-wrap lg:gap-[60px]">
+          <div class="flex flex-col gap-6">
+            <p class="text-sm font-medium text-gray-200 tracking-[0.49px]">Products</p>
+            <ul class="flex flex-col gap-[18px]">
+              <li><a href="https://lightmatter.co/products/l200/"        class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Passage L200</a></li>
+              <li><a href="https://lightmatter.co/products/passage-l20/" class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Passage L20</a></li>
+              <li><a href="https://lightmatter.co/products/guide-1/"     class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Guide 1</a></li>
+              <li><a href="https://lightmatter.co/products/guide-dr/" class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Guide DR</a></li>
+            </ul>
+          </div>
+          <div class="flex flex-col gap-6">
+            <p class="text-sm font-medium text-gray-200 tracking-[0.49px]">Reference Systems</p>
+            <ul class="flex flex-col gap-[18px]">
+              <li><a href="https://lightmatter.co/products/passage-m1000-evk/" class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Passage M1000 EVK</a></li>
+              <li><a href="https://lightmatter.co/products/passage-evk100/"    class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Passage EVK100</a></li>
+              <li><a href="https://lightmatter.co/products/passage-evk50/"     class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Passage EVK50</a></li>
+              <li><a href="https://lightmatter.co/products/guide-1/"           class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Guide 1 EVK</a></li>
+            </ul>
+          </div>
+          <div class="flex flex-col gap-6">
+            <p class="text-sm font-medium text-gray-200 tracking-[0.49px]">Media</p>
+            <ul class="flex flex-col gap-[18px]">
+              <li><a href="https://lightmatter.co/press-releases/" class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Press Releases</a></li>
+              <li><a href="https://lightmatter.co/news/"           class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">News</a></li>
+              <li><a href="https://lightmatter.co/blog/"           class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Blog</a></li>
+              <li><a href="https://lightmatter.co/knowledge-hub/"  class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Knowledge Hub</a></li>
+              <li><a href="https://lightmatter.co/resources/"      class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Resources</a></li>
+            </ul>
+          </div>
+          <div class="flex flex-col gap-6">
+            <p class="text-sm font-medium text-gray-200 tracking-[0.49px]">Company</p>
+            <ul class="flex flex-col gap-[18px]">
+              <li><a href="https://lightmatter.co/about/"          class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">About</a></li>
+              <li><a href="https://lightmatter.co/vision/"         class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Vision</a></li>
+              <li><a href="https://lightmatter.co/events/"         class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Events</a></li>
+              <li><a href="https://lightmatter.co/people/careers/" class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Careers</a></li>
+              <li><a href="https://lightmatter.co/contact-us/"     class="text-sm font-medium tracking-[0.49px] hover:text-gray-300 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="flex flex-col gap-[10px]">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
+          <div class="flex gap-6">
+            <span class="text-sm font-medium text-gray-300 tracking-[0.49px]">&copy; 2026 Lightmatter</span>
+            <a href="https://lightmatter.co/privacy-policy/" class="text-sm font-medium text-gray-300 tracking-[0.49px] hover:text-white transition-colors">Privacy</a>
+            <a href="https://lightmatter.co/terms-of-use/"   class="text-sm font-medium text-gray-300 tracking-[0.49px] hover:text-white transition-colors">Terms of Use</a>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="https://www.linkedin.com/company/lightmatter/" target="_blank" rel="noopener noreferrer" aria-label="Lightmatter on LinkedIn" class="block text-gray-300 hover:text-white transition-colors">
+              <svg height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.0392 17.0433H14.0775V12.4025C14.0775 11.2958 14.055 9.87167 12.5342 9.87167C10.99 9.87167 10.7542 11.0758 10.7542 12.3208V17.0433H7.7925V7.5H10.6375V8.80083H10.6758C11.0733 8.05083 12.04 7.25917 13.4842 7.25917C16.485 7.25917 17.04 9.23417 17.04 11.805L17.0392 17.0433ZM4.4475 6.19417C3.49417 6.19417 2.72833 5.4225 2.72833 4.47333C2.72833 3.525 3.495 2.75417 4.4475 2.75417C5.3975 2.75417 6.1675 3.525 6.1675 4.47333C6.1675 5.4225 5.39667 6.19417 4.4475 6.19417ZM5.9325 17.0433H2.9625V7.5H5.9325V17.0433ZM18.5208 0H1.47583C0.66 0 0 0.645 0 1.44083V18.5592C0 19.3558 0.66 20 1.47583 20H18.5183C19.3333 20 20 19.3558 20 18.5592V1.44083C20 0.645 19.3333 0 18.5183 0H18.5208Z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@LightmatterInc" target="_blank" rel="noopener noreferrer" aria-label="Lightmatter on YouTube" class="block text-gray-300 hover:text-white transition-colors">
+              <svg height="20" viewBox="45 0 25.624 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M57.8942 1H58.0367C59.3532 1.0048 66.0238 1.05285 67.8223 1.53652C68.366 1.68414 68.8615 1.97187 69.2592 2.37095C69.6569 2.77004 69.9428 3.26651 70.0885 3.81075C70.2503 4.41934 70.364 5.22493 70.4409 6.05614L70.4569 6.22271L70.4921 6.63911L70.5049 6.80568C70.609 8.26951 70.6219 9.64045 70.6235 9.93994V10.0601C70.6219 10.3708 70.6074 11.8346 70.4921 13.3593L70.4793 13.5274L70.4649 13.694C70.3848 14.6101 70.2663 15.5198 70.0885 16.1893C69.9428 16.7335 69.6569 17.23 69.2592 17.629C68.8615 18.0281 68.366 18.3159 67.8223 18.4635C65.9645 18.9632 58.9032 18.9984 57.9246 19H57.6972C57.2023 19 55.1555 18.9904 53.0094 18.9167L52.7372 18.9071L52.5978 18.9007L52.324 18.8895L52.0501 18.8783C50.2724 18.7998 48.5795 18.6733 47.7995 18.4619C47.256 18.3144 46.7607 18.0269 46.363 17.6281C45.9653 17.2293 45.6793 16.7332 45.5333 16.1893C45.3555 15.5214 45.237 14.6101 45.157 13.694L45.1441 13.5258L45.1313 13.3593C45.0518 12.2741 45.008 11.1866 45 10.0985L45 9.9015C45.0032 9.55717 45.016 8.3672 45.1025 7.05392L45.1137 6.88896L45.1185 6.80568L45.1313 6.63911L45.1666 6.22271L45.1826 6.05614C45.2595 5.22493 45.3732 4.41774 45.5349 3.81075C45.6806 3.26651 45.9666 2.77004 46.3643 2.37095C46.762 1.97187 47.2574 1.68414 47.8011 1.53652C48.5811 1.32832 50.274 1.2002 52.0517 1.12012L52.324 1.10891L52.5994 1.0993L52.7372 1.09449L53.011 1.08328C54.5353 1.03428 56.0601 1.00705 57.5851 1.0016L57.8942 1ZM55.25 6.14103V13.8574L61.9077 10.0008L55.25 6.14103Z"/></svg>
+            </a>
+            <a href="https://twitter.com/lightmatterco" target="_blank" rel="noopener noreferrer" aria-label="Lightmatter on X" class="block text-gray-300 hover:text-white transition-colors">
+              <svg height="20" viewBox="95.624 0 17.977 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M109.782 1.875H112.538L106.516 8.75833L113.601 18.125H108.053L103.708 12.4442L98.7368 18.125H95.9785L102.42 10.7625L95.6235 1.875H101.312L105.239 7.0675L109.782 1.875ZM108.814 16.475H110.342L100.482 3.43833H98.8426L108.814 16.475Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <p class="text-sm text-gray-300 tracking-[0.49px] leading-5 max-w-[598px]">
+          Lightmatter, the LM logo, Idiom, Guide, Passage, Envise, Edgeless I/O, eClick, vClick, A Giant Leap, Passagelink, and VLSP are all trademarks of Lightmatter, Inc.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    const ALT_CHARS = new Set(['a','b','e','f','g','i','j','k','l','m','n','q','r','t','u','v','w','x','y','z']);
+    const DELAY = 150;
+    const HOLD  = 3;
+    const hasAlt  = ch  => ALT_CHARS.has(ch.toLowerCase());
+    const wrapAlt = ch  => `<span class="stylistic-alt">${ch}</span>`;
+    const render  = (el, segs) => { el.innerHTML = segs.map(s => s.join('')).join('<br>'); };
+
+    function computeKeepers(flatChars) {
+      const keepers = new Set();
+      let wordStart = null;
+      const commitWord = end => {
+        if (wordStart === null) return;
+        const wordLen = end - wordStart;
+        if (wordLen > 4) {
+          const candidates = flatChars.slice(wordStart, end).filter(c => hasAlt(c.ch) && c.ch.toLowerCase() !== 'l');
+          if (candidates.length) {
+            const pick = candidates[Math.floor(Math.random() * candidates.length)];
+            keepers.add(`${pick.si}:${pick.ci}`);
+          }
+        }
+        wordStart = null;
+      };
+      flatChars.forEach(({ ch, si, ci }, idx) => {
+        if (si === -1) { commitWord(idx); }
+        else if (/[a-zA-Z]/.test(ch)) { if (wordStart === null) wordStart = idx; }
+        else { commitWord(idx); }
+      });
+      commitWord(flatChars.length);
+      return keepers;
+    }
+
+    function runTypeAnimation(el) {
+      if (!el.dataset.originalHtml) el.dataset.originalHtml = el.innerHTML;
+      const segments = el.dataset.originalHtml.split(/<br\s*\/?>/i);
+      // Tokenize keeping HTML entities (&amp;, &rsquo;, &#39; …) whole so the
+      // per-character animator never splits one into "&","a","m","p",";".
+      const tokenize = seg => seg.match(/&[a-zA-Z]+;|&#\d+;|[\s\S]/g) || [];
+      const states   = segments.map(seg => tokenize(seg));
+      const flatChars = [];
+      states.forEach((seg, si) => {
+        seg.forEach((ch, ci) => flatChars.push({ si, ci, ch }));
+        flatChars.push({ si: -1, ci: -1, ch: ' ' });
+      });
+      const eligible = flatChars.filter(c => c.si !== -1 && hasAlt(c.ch));
+      const keepers  = el.dataset.rest
+        ? new Set(el.dataset.rest.split(',').map(s => s.trim()))
+        : computeKeepers(flatChars);
+      eligible.forEach(({ si, ci, ch }, i) => {
+        setTimeout(() => { states[si][ci] = wrapAlt(ch); render(el, states); }, i * DELAY);
+      });
+      const reverting = eligible.filter(({ si, ci }) => !keepers.has(`${si}:${ci}`));
+      reverting.forEach(({ si, ci, ch }, i) => {
+        setTimeout(() => { states[si][ci] = ch; render(el, states); }, i * DELAY + HOLD * DELAY);
+      });
+    }
+
+    let revealObserver = null;
+    function toggleReveal(btn) {
+      const html = document.documentElement;
+      const active = !html.classList.contains('reveal-mode');
+      btn.querySelector('span:first-child').textContent = active ? '◉' : '↓';
+      btn.style.background = active ? '#2a2a2a' : '';
+      btn.style.color      = active ? '#fff'    : '#aaa';
+      html.classList.toggle('reveal-mode', active);
+      if (active) {
+        const sections = document.querySelectorAll('main > section');
+        sections.forEach(el => {
+          el.classList.add('lm-reveal');
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
+        });
+        revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(e => e.target.classList.toggle('is-in', e.isIntersecting));
+        }, { threshold: 0.1 });
+        sections.forEach(el => revealObserver.observe(el));
+      } else {
+        if (revealObserver) { revealObserver.disconnect(); revealObserver = null; }
+        document.querySelectorAll('.lm-reveal').forEach(el => el.classList.remove('lm-reveal', 'is-in'));
+      }
+    }
+
+    let elementRevealObserver = null;
+    function toggleElementReveal(btn) {
+      const html = document.documentElement;
+      const active = !html.classList.contains('element-reveal-mode');
+      btn.querySelector('span:first-child').textContent = active ? '◉' : '↓';
+      btn.style.background = active ? '#2a2a2a' : '';
+      btn.style.color      = active ? '#fff'    : '#aaa';
+      html.classList.toggle('element-reveal-mode', active);
+      if (active) {
+        const items = document.querySelectorAll('main .lm-item');
+        items.forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) {
+            const section = el.closest('main > section');
+            const siblings = section ? [...section.querySelectorAll('.lm-item')] : [];
+            el.style.transitionDelay = `${siblings.indexOf(el) * 0.07}s`;
+            el.classList.add('is-in');
+          }
+        });
+        elementRevealObserver = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              const section = e.target.closest('main > section');
+              const siblings = section ? [...section.querySelectorAll('.lm-item')] : [];
+              e.target.style.transitionDelay = `${siblings.indexOf(e.target) * 0.07}s`;
+              e.target.classList.add('is-in');
+            } else {
+              e.target.classList.remove('is-in');
+              e.target.style.transitionDelay = '';
+            }
+          });
+        }, { threshold: 0.1 });
+        items.forEach(el => elementRevealObserver.observe(el));
+      } else {
+        if (elementRevealObserver) { elementRevealObserver.disconnect(); elementRevealObserver = null; }
+        document.querySelectorAll('.lm-item').forEach(el => {
+          el.classList.remove('is-in');
+          el.style.transitionDelay = '';
+        });
+      }
+    }
+
+    function toggleDarkMode(btn) {
+      const isDark = document.documentElement.classList.toggle('dark');
+      btn.querySelector('span:first-child').textContent = isDark ? '○' : '◑';
+      btn.querySelector('span:last-child').textContent  = isDark ? 'Light' : 'Dark';
+    }
+
+    function replayAnimations() {
+      document.querySelectorAll('.animate-type').forEach(el => {
+        if (el.dataset.originalHtml) el.innerHTML = el.dataset.originalHtml;
+        delete el.dataset.animated;
+        el.dataset.animated = '1';
+        runTypeAnimation(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const targets = document.querySelectorAll('.animate-type');
+      if (!targets.length) return;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = '1';
+            runTypeAnimation(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      targets.forEach(el => observer.observe(el));
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Section reveal is on by default; every other experiment starts off
+      const revealBtn = document.querySelector('[onclick="toggleReveal(this)"]');
+      if (revealBtn) toggleReveal(revealBtn);
+    });
+  </script>
+
+  <!-- ── Experiment Panel ─────────────────────────────────────────────────── -->
+  <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3">
+
+    <div id="exp-window" class="hidden w-56 rounded-xl overflow-hidden shadow-2xl" style="background:#111;border:1px solid #2a2a2a">
+      <div class="px-4 py-3" style="border-bottom:1px solid #222">
+        <p class="text-xs font-medium tracking-[0.12em] uppercase" style="color:#555">Experiments</p>
+      </div>
+      <div class="p-2 flex flex-col gap-1">
+
+        <p class="px-3 pt-1 pb-0.5 text-[10px] font-medium tracking-[0.12em] uppercase" style="color:#444">Animations</p>
+
+        <button onclick="replayAnimations()"
+                class="w-full text-left text-sm px-3 py-2 rounded-lg transition-colors flex items-center gap-2"
+                style="color:#aaa"
+                onmouseover="this.style.background='#333';this.style.color='#fff'"
+                onmouseout="this.style.background='';this.style.color='#aaa'">
+          <span style="font-size:14px;line-height:1">↺</span>
+          <span>Replay headlines</span>
+        </button>
+
+        <button onclick="toggleReveal(this)"
+                class="w-full text-left text-sm px-3 py-2 rounded-lg transition-colors flex items-center gap-2"
+                style="color:#aaa"
+                onmouseover="this.style.background='#333';this.style.color='#fff'"
+                onmouseout="this.style.background='';this.style.color='#aaa'">
+          <span style="font-size:14px;line-height:1">↓</span>
+          <span>Section reveal</span>
+        </button>
+
+        <button onclick="toggleElementReveal(this)"
+                class="w-full text-left text-sm px-3 py-2 rounded-lg transition-colors flex items-center gap-2"
+                style="color:#aaa"
+                onmouseover="this.style.background='#333';this.style.color='#fff'"
+                onmouseout="this.style.background='';this.style.color='#aaa'">
+          <span style="font-size:14px;line-height:1">↓</span>
+          <span>Element reveal</span>
+        </button>
+
+        <div style="height:1px;background:#222;margin:4px 0"></div>
+
+        <p class="px-3 pt-1 pb-0.5 text-[10px] font-medium tracking-[0.12em] uppercase" style="color:#444">Modes</p>
+
+        <button id="exp-dark-toggle" onclick="toggleDarkMode(this)"
+                class="w-full text-left text-sm px-3 py-2 rounded-lg transition-colors flex items-center gap-2"
+                style="color:#aaa"
+                onmouseover="this.style.background='#333';this.style.color='#fff'"
+                onmouseout="this.style.background='';this.style.color='#aaa'">
+          <span style="font-size:14px;line-height:1">◑</span>
+          <span>Dark</span>
+        </button>
+
+      </div>
+    </div>
+
+    <button onclick="document.getElementById('exp-window').classList.toggle('hidden')"
+            class="w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-colors"
+            style="background:#111;color:#888;border:1px solid #2a2a2a"
+            onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"
+            title="Experiments">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1V8.5L3 13.2C2.7 13.7 3.1 14.4 3.7 14.4H12.3C12.9 14.4 13.3 13.7 13 13.2L10 8.5V1" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+        <line x1="6" y1="4.5" x2="10" y2="4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="6.5" cy="11.2" r="0.9" fill="currentColor"/>
+      </svg>
+    </button>
+
+  </div>
+
+  <script>
+    function copyAttribution(btn) {
+      const el = document.getElementById('attr-line');
+      if (!el) return;
+      const text = el.textContent.replace(/\s+/g, ' ').trim();
+      const label = btn.querySelector('.copy-label');
+      const done = () => {
+        if (!label) return;
+        const prev = label.textContent;
+        label.textContent = 'Copied';
+        setTimeout(() => { label.textContent = prev; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(done);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    }
+  </script>
+
+</body>
+</html>
