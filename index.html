@@ -53,6 +53,7 @@
 
   <style>
     .h4 { font-family:'Object Sans',sans-serif; font-size:20px; font-weight:500; line-height:1.1; letter-spacing:0; color:#111; }
+    .stylistic-alt { font-feature-settings:'ss01' 1; }
     .logo-toggle:hover { color:#FF3300; }
     .logo-toggle.active { text-decoration:underline; text-underline-offset:3px; }
 
@@ -344,7 +345,7 @@
     <section id="brand-guidelines" class="bg-white">
       <div class="container-fluid pt-20 pb-16 md:pt-28 md:pb-24 xl:pt-36 xl:pb-32">
         <p class="eyebrow">Updated June 2026</p>
-        <h1 class="font-display font-normal text-[39px] md:text-[61px] leading-none lg:text-6xl xl:text-7xl mt-6 tracking-[-1.56px] md:tracking-[-2.44px] lg:tracking-[-3.8px] xl:tracking-[-4.76px]">Brand<br>Guidelines</h1>
+        <h1 class="font-display font-normal text-[39px] md:text-[61px] leading-none lg:text-6xl xl:text-7xl mt-6 tracking-[-1.56px] md:tracking-[-2.44px] lg:tracking-[-3.8px] xl:tracking-[-4.76px] animate-type">Brand<br>Guidelines</h1>
         <div class="text-[25px] leading-[1.35] max-w-[760px] mt-8 flex flex-col gap-5">
           <p>This brand guidelines page provides an outline of the visual and verbal elements within the Lightmatter Brand.</p>
           <p>It is a living, breathing page that helps explain how the various elements within the identity should be used through examples and applications. By following these guidelines, we can ensure all creative work feels cohesive.</p>
@@ -1788,6 +1789,76 @@
         dl(new Blob([html],{type:'text/html'}),'lightmatter-color-reference.html');
       };
     })();
+
+    // Alt-character type animation — mirrors guide-dr implementation
+    (function () {
+      const ALT_CHARS = new Set(['a','b','e','f','g','i','j','k','l','m','n','q','r','t','u','v','w','x','y','z']);
+      const DELAY = 150;
+      const HOLD  = 3;
+      const hasAlt  = ch => ALT_CHARS.has(ch.toLowerCase());
+      const wrapAlt = ch => '<span class="stylistic-alt">' + ch + '</span>';
+      const render  = (el, segs) => { el.innerHTML = segs.map(s => s.join('')).join('<br>'); };
+
+      function computeKeepers(flatChars) {
+        var keepers = new Set();
+        var wordStart = null;
+        function commitWord(end) {
+          if (wordStart === null) return;
+          var wordLen = end - wordStart;
+          if (wordLen > 4) {
+            var candidates = flatChars.slice(wordStart, end).filter(function (c) { return hasAlt(c.ch) && c.ch.toLowerCase() !== 'l'; });
+            if (candidates.length) {
+              var pick = candidates[Math.floor(Math.random() * candidates.length)];
+              keepers.add(pick.si + ':' + pick.ci);
+            }
+          }
+          wordStart = null;
+        }
+        flatChars.forEach(function (item, idx) {
+          if (item.si === -1) { commitWord(idx); }
+          else if (/[a-zA-Z]/.test(item.ch)) { if (wordStart === null) wordStart = idx; }
+          else { commitWord(idx); }
+        });
+        commitWord(flatChars.length);
+        return keepers;
+      }
+
+      function runTypeAnimation(el) {
+        if (!el.dataset.originalHtml) el.dataset.originalHtml = el.innerHTML;
+        var segments = el.dataset.originalHtml.split(/<br\s*\/?>/i);
+        var states   = segments.map(function (seg) { return seg.split(''); });
+        var flatChars = [];
+        states.forEach(function (seg, si) {
+          seg.forEach(function (ch, ci) { flatChars.push({ si: si, ci: ci, ch: ch }); });
+          flatChars.push({ si: -1, ci: -1, ch: ' ' });
+        });
+        var eligible = flatChars.filter(function (c) { return c.si !== -1 && hasAlt(c.ch); });
+        var keepers  = el.dataset.rest
+          ? new Set(el.dataset.rest.split(',').map(function (s) { return s.trim(); }))
+          : computeKeepers(flatChars);
+        eligible.forEach(function (item, i) {
+          setTimeout(function () { states[item.si][item.ci] = wrapAlt(item.ch); render(el, states); }, i * DELAY);
+        });
+        var reverting = eligible.filter(function (item) { return !keepers.has(item.si + ':' + item.ci); });
+        reverting.forEach(function (item, i) {
+          setTimeout(function () { states[item.si][item.ci] = item.ch; render(el, states); }, i * DELAY + HOLD * DELAY);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var targets = document.querySelectorAll('.animate-type');
+        if (!targets.length) return;
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+              entry.target.dataset.animated = '1';
+              runTypeAnimation(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        targets.forEach(function (el) { observer.observe(el); });
+      });
+    }());
   </script>
 
 </body>
