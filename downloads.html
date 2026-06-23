@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html id="top" class="no-js overflow-x-hidden scroll-smooth" lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads · Lightmatter Brand</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <script src="assets/tailwind.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            red:     { 500: '#FF3300' },
+            cyan:    { 500: '#00E7E7' },
+            blue:    { 500: '#0033FF' },
+            purple:  { 500: '#7300FF' },
+            magenta: { 500: '#FF00DB' },
+            gray: {
+              900: '#000000', 700: '#333333', 600: '#333333', 500: '#757575',
+              400: '#BBBBBB', 300: '#D4D4D4', 200: '#EEEEEE', 100: '#F9F9F9',
+            },
+          },
+          fontFamily: {
+            sans: ['"Object Sans"', '"Inter"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+            display: ['"Inference Sans"', '"Impact"', '"Arial Narrow"', 'sans-serif'],
+            'dm-sans': ['"DM Sans"', 'Arial', 'sans-serif'],
+          },
+          fontSize: {
+            '7xl': ['119px', { lineHeight: '1', letterSpacing: '-4px' }],
+            '6xl': ['95px', { lineHeight: '1', letterSpacing: '-3.8px' }],
+            '5xl': ['76px', { lineHeight: '1.1', letterSpacing: '-3.04px' }],
+            '4xl': ['61px', { lineHeight: '1.1', letterSpacing: '-2.44px' }],
+            '2xl': ['39px', { lineHeight: '1.1', letterSpacing: '-0.78px' }],
+            xl:   ['31px', { lineHeight: '1.1', letterSpacing: '-0.31px' }],
+            lg:   ['25px', { lineHeight: '1.4' }],
+            base: ['16px', { lineHeight: '1.4' }],
+            sm:   ['14px', { lineHeight: '1.2' }],
+            xs:   ['12px', { lineHeight: '1.4' }],
+          },
+          spacing: { 'header': '75px' },
+          height: { 'header': '75px' },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    @font-face { font-family:'Inference Sans'; src:url('assets/fonts/Inference_Sans.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:block; }
+    @font-face { font-family:'Object Sans'; src:url('assets/fonts/ObjectSans-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+    @font-face { font-family:'Object Sans'; src:url('assets/fonts/ObjectSans-Medium.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
+
+    .container-fluid { width:100%; max-width:1440px; margin:0 auto; padding-left:32px; padding-right:32px; }
+    @media (min-width:768px){ .container-fluid{ padding-left:48px; padding-right:48px; } }
+    @media (min-width:1024px){ .container-fluid{ padding-left:96px; padding-right:96px; } }
+    @media (min-width:1280px){ .container-fluid{ padding-left:220px; padding-right:182px; } }
+
+    .nav-link { font-size:13px; letter-spacing:0.02em; line-height:1; color:#111; text-decoration:none; transition:color .15s; }
+    .nav-link:hover { color:#FF3300; }
+    .nav-link.active { color:#FF3300; }
+
+    .mobile-menu { opacity:0; transform:translateY(-8px); pointer-events:none; transition:opacity .2s ease, transform .2s ease; }
+    .mobile-menu.is-open { opacity:1; transform:translateY(0); pointer-events:auto; }
+    .nav-link-mobile { display:block; padding:13px 0; font-size:18px; color:#111; text-decoration:none; border-top:1px solid #EEEEEE; transition:color .15s; }
+    .nav-link-mobile:first-child { border-top:0; }
+    .nav-link-mobile:hover, .nav-link-mobile.active { color:#FF3300; }
+
+    :root {
+      --toc-transition-duration: 0.32s;
+      --toc-easing: cubic-bezier(.16,1,.3,1);
+    }
+    .post-toc-wrap {
+      left: 16px;
+      top: calc(50vh - 36px);
+      width: 150px;
+      transition: transform var(--toc-transition-duration) var(--toc-easing);
+    }
+    @media (min-width:1280px) { .post-toc-wrap { left: 24px; } }
+    .post-toc-inner {
+      transition: transform var(--toc-transition-duration) var(--toc-easing), opacity var(--toc-transition-duration) var(--toc-easing);
+    }
+    .toc-measuring, .toc-measuring * { transition: none !important; }
+    .toc-a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: color 0.14s ease, height var(--toc-transition-duration) var(--toc-easing), padding var(--toc-transition-duration) var(--toc-easing);
+      transform-origin: left;
+      height: var(--expanded-link-height, 22px);
+      text-decoration: none;
+    }
+    [data-level="h2"] .toc-a {
+      padding-left: 0;
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 500;
+      color: #5f5f5f;
+    }
+    [data-level="h3"] .toc-a {
+      padding-left: 10px;
+      font-size: 12px;
+      line-height: 1.25;
+      color: #7a7a7a;
+    }
+    .toc-a:hover, .toc-a:focus-visible { color: #FF3300; }
+    .toc-item.active .toc-a { color: #FF3300; }
+    .toc-group:has(.toc-sub-list .toc-item.active) > .toc-item .toc-a { color: #FF3300; }
+    .toc-text {
+      transform-origin: left center;
+      will-change: transform;
+      white-space: nowrap;
+      transition: transform var(--toc-transition-duration) var(--toc-easing), opacity var(--toc-transition-duration) var(--toc-easing), color var(--toc-transition-duration) var(--toc-easing);
+    }
+    .toc-sub-list {
+      max-height: var(--toc-sub-list-height, 240px);
+      opacity: 1;
+      overflow: hidden;
+      padding-top: 4px !important;
+      row-gap: 2px !important;
+      transition: max-height var(--toc-transition-duration) var(--toc-easing), opacity var(--toc-transition-duration) var(--toc-easing);
+    }
+    .toc-collapsed .toc-list { gap: 8px; }
+    .toc-collapsed [data-level="h2"] .toc-a { padding-left: 0; height: 18px; }
+    .toc-collapsed [data-level="h3"] .toc-a { padding-left: 10px; height: 16px; }
+    .toc-collapsed .toc-text { transform: scale(1, 1); opacity: 1; pointer-events: auto; }
+    .toc-collapsed .toc-sub-list { max-height: 0; opacity: 0; }
+    .toc-collapsed.toc-hover .toc-list { gap: 7px; }
+    .toc-collapsed.toc-hover .toc-a { height: 18px; }
+    .toc-collapsed.toc-hover [data-level="h2"] .toc-a { padding-left: 0; }
+    .toc-collapsed.toc-hover [data-level="h3"] .toc-a { padding-left: 10px; }
+    .toc-collapsed.toc-hover .toc-sub-list { max-height: var(--toc-sub-list-height, 240px); opacity: 1; }
+    .toc-collapsed.toc-hover .toc-text { transform: scale(1, 1); opacity: 1; pointer-events: auto; }
+    .toc-collapsed:not(.toc-hover) .toc-item[data-level="h3"].active .toc-a { color: #7a7a7a; }
+
+    [id] { scroll-margin-top:90px; }
+    .eyebrow { font-family:'Object Sans',sans-serif; font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; color:#FF3300; }
+    .cta-blue {
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid #0033FF; color:#0033FF; background:transparent;
+      transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+      cursor:pointer;
+    }
+    .cta-blue:hover { background:#0033FF; color:#fff; border-color:#0033FF; }
+
+    html.reveal-mode .lm-reveal-item {
+      opacity:0; transform:translate3d(0,28px,0);
+      transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+      will-change:opacity, transform;
+    }
+    html.reveal-mode .lm-reveal-item.is-in { opacity:1; transform:none; }
+    @media (prefers-reduced-motion:reduce) {
+      html.reveal-mode .lm-reveal-item { transition:none !important; opacity:1 !important; transform:none !important; }
+    }
+
+    html.dark body             { background-color:#000 !important; color:#e5e5e5; }
+    html.dark header           { background-color:rgba(0,0,0,0.97) !important; border-bottom-color:#282828; }
+    html.dark #mobile-menu     { background-color:rgba(0,0,0,0.97) !important; border-bottom-color:#282828; }
+    html.dark .bg-white        { background-color:#0d0d0d !important; }
+    html.dark .bg-gray-100     { background-color:#000 !important; }
+    html.dark footer           { background-color:#111 !important; border-top:1px solid #282828; }
+    html.dark .text-gray-900   { color:#e5e5e5; }
+    html.dark .text-gray-600   { color:#999; }
+    html.dark .text-gray-500   { color:#8a8a8a; }
+    html.dark .border-gray-200 { border-color:#1e1e1e; }
+    html.dark .border-gray-300 { border-color:#222; }
+    html.dark .nav-link        { color:#ccc; }
+    html.dark .nav-link:hover  { color:#FF3300; }
+    html.dark .nav-link.active { color:#FF3300; }
+    html.dark .nav-link-mobile { color:#ccc; border-top-color:#222; }
+    html.dark .nav-link-mobile:hover, html.dark .nav-link-mobile.active { color:#FF3300; }
+    html.dark .hover\:text-red-500:hover { color:#FF3300 !important; }
+    html.dark #dark-toggle, html.dark #menu-toggle { color:#fff; }
+    html.dark .cta-blue        { color:#fff; border-color:#fff; }
+    html.dark .cta-blue:hover  { background-color:#fff; color:#000; border-color:#fff; }
+    html.dark header a[href="index.html#top"] img { filter:brightness(0) invert(1); }
+    html.dark [data-level="h2"] .toc-a { color:#999; }
+    html.dark [data-level="h3"] .toc-a { color:#777; }
+    html.dark .toc-a:hover, html.dark .toc-a:focus-visible { color:#FF3300; }
+    html.dark .toc-item.active .toc-a { color:#FF3300; }
+    html.dark .toc-group:has(.toc-sub-list .toc-item.active) > .toc-item .toc-a { color:#FF3300; }
+    html.dark .toc-collapsed:not(.toc-hover) .toc-item[data-level="h3"].active .toc-a { color:#777; }
+
+    /* Password gate */
+    #pw-gate { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:#fff; padding:24px; }
+    html.dark #pw-gate { background:#000; }
+    html.lm-authed #pw-gate, #pw-gate.is-hidden { display:none; }
+    #pw-input {
+      width: 100%;
+      height: 44px;
+      background-color: #f9f9f9;
+      border: 1px solid #d4d4d4;
+      border-radius: 0;
+      padding: 10px 14px;
+      font-family: 'DM Sans', 'Object Sans', sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      color: #000000;
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    #pw-input::placeholder { color: #757575; transition: color .1s ease; }
+    #pw-input:focus::placeholder { color: transparent; }
+    #pw-input:focus { border-color: #0033ff; box-shadow: 0 0 0 3px rgba(0,51,255,0.12); }
+    html.dark #pw-input { background-color: #1a1a1a; border-color: #333333; color: #e5e5e5; }
+    html.dark #pw-input::placeholder { color: #8a8a8a; }
+    html.dark #pw-input:focus::placeholder { color: transparent; }
+  </style>
+
+  <!-- Skip the gate if already unlocked this session (runs before paint to avoid a flash) -->
+  <script>try{if(sessionStorage.getItem('lm-downloads-auth')==='1')document.documentElement.classList.add('lm-authed');}catch(e){}</script>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen font-sans bg-white text-gray-900">
+
+  <!-- ── Password gate ───────────────────────────────────────────────────── -->
+  <div id="pw-gate">
+    <div class="w-full max-w-[360px] flex flex-col gap-6">
+      <p class="text-sm leading-[1.5] text-gray-900">Enter the password to access brand downloads</p>
+      <form id="pw-form" class="flex flex-col gap-3" autocomplete="off">
+        <input id="pw-input" type="password" autocomplete="current-password" aria-label="Password" placeholder="Password" />
+        <button type="submit" class="cta-blue px-3.5 py-2.5 text-sm font-medium">Enter</button>
+        <p id="pw-error" class="text-sm text-red-500 hidden">Incorrect password. Please try again.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+  <header class="fixed left-0 right-0 top-0 z-50 h-header border-b border-gray-300 bg-white/95 backdrop-blur">
+    <div class="container-fluid h-full">
+      <div class="h-full flex items-center justify-between gap-6">
+        <a class="flex items-baseline gap-5 shrink-0" href="index.html#top">
+          <img width="48" height="24" src="assets/images/logos/lm-logomark-red.svg" alt="Lightmatter">
+        </a>
+        <nav class="hidden md:flex xl:hidden items-center gap-4" aria-label="Sections">
+          <a class="nav-link" href="index.html#logo">Logo</a>
+          <a class="nav-link" href="index.html#color">Color</a>
+          <a class="nav-link" href="index.html#type">Type</a>
+          <a class="nav-link" href="index.html#icons">Icons</a>
+          <a class="nav-link" href="index.html#photography">Imagery</a>
+          <a class="nav-link" href="index.html#voice">Voice</a>
+          <a class="nav-link" href="index.html#trademarks">Trademarks</a>
+          <a class="nav-link active" href="downloads.html">Downloads</a>
+        </nav>
+        <div class="flex items-center gap-3 shrink-0">
+          <button id="dark-toggle" type="button" onclick="toggleDarkMode()"
+                  class="dark-toggle-btn xl:hidden -m-2 p-2 text-gray-900 hover:text-red-500 transition-colors"
+                  aria-label="Switch to dark mode">
+            <svg class="dark-toggle-moon w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="dark-toggle-sun w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <button id="menu-toggle" type="button" class="md:hidden -m-2 p-2 text-gray-900 hover:text-red-500 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="icon-open w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <svg class="icon-close hidden w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden absolute left-0 right-0 top-full border-b border-gray-300 bg-white/95 backdrop-blur" aria-hidden="true">
+      <nav class="container-fluid flex flex-col py-2" aria-label="Sections">
+        <a class="nav-link-mobile" href="index.html#logo">Logo</a>
+        <a class="nav-link-mobile" href="index.html#color">Color</a>
+        <a class="nav-link-mobile" href="index.html#type">Type</a>
+        <a class="nav-link-mobile" href="index.html#icons">Icons</a>
+        <a class="nav-link-mobile" href="index.html#photography">Imagery</a>
+        <a class="nav-link-mobile" href="index.html#voice">Voice</a>
+        <a class="nav-link-mobile" href="index.html#trademarks">Trademarks</a>
+        <a class="nav-link-mobile active" href="downloads.html">Downloads</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── TOC rail ──────────────────────────────────────────────────────────── -->
+  <aside id="toc-rail" class="post-toc-wrap hidden xl:block fixed -translate-y-1/2 z-40">
+    <div class="post-toc-inner toc-collapsed font-sans opacity-0 transition-opacity duration-200">
+      <ul class="toc-list flex flex-col gap-2">
+        <!-- Hero -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#brand-guidelines">
+              <div class="toc-text"><span class="toc-text-inner">Brand</span></div>
+            </a>
+          </div>
+        </li>
+
+        <!-- Logo Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#logo">
+              <div class="toc-text"><span class="toc-text-inner">Logo</span></div>
+            </a>
+          </div>
+          <ul class="toc-sub-list flex flex-col gap-1.5 pt-2">
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#logo-logomark">
+                <div class="toc-text"><span class="toc-text-inner">Logomark</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#logo-wordmark">
+                <div class="toc-text"><span class="toc-text-inner">Wordmark</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#logo-scale">
+                <div class="toc-text"><span class="toc-text-inner">Scale</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#logo-products">
+                <div class="toc-text"><span class="toc-text-inner">Product logos</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#logo-social">
+                <div class="toc-text"><span class="toc-text-inner">Social avatar</span></div>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Color Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#color">
+              <div class="toc-text"><span class="toc-text-inner">Color</span></div>
+            </a>
+          </div>
+          <ul class="toc-sub-list flex flex-col gap-1.5 pt-2">
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#color-primary">
+                <div class="toc-text"><span class="toc-text-inner">Primary</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#color-secondary">
+                <div class="toc-text"><span class="toc-text-inner">Secondary</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#color-greys">
+                <div class="toc-text"><span class="toc-text-inner">Greys</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#color-tints">
+                <div class="toc-text"><span class="toc-text-inner">Tints</span></div>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Type Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#type">
+              <div class="toc-text"><span class="toc-text-inner">Type</span></div>
+            </a>
+          </div>
+          <ul class="toc-sub-list flex flex-col gap-1.5 pt-2">
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#type-display">
+                <div class="toc-text"><span class="toc-text-inner">Primary</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#type-text">
+                <div class="toc-text"><span class="toc-text-inner">Secondary</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#type-styles">
+                <div class="toc-text"><span class="toc-text-inner">Styles</span></div>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Icons Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#icons">
+              <div class="toc-text"><span class="toc-text-inner">Icons</span></div>
+            </a>
+          </div>
+        </li>
+
+        <!-- Imagery Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#photography">
+              <div class="toc-text"><span class="toc-text-inner">Imagery</span></div>
+            </a>
+          </div>
+        </li>
+
+        <!-- Voice Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#voice">
+              <div class="toc-text"><span class="toc-text-inner">Voice</span></div>
+            </a>
+          </div>
+        </li>
+
+        <!-- Trademarks Group -->
+        <li class="toc-group flex flex-col">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="index.html#trademarks">
+              <div class="toc-text"><span class="toc-text-inner">Trademarks</span></div>
+            </a>
+          </div>
+          <ul class="toc-sub-list flex flex-col gap-1.5 pt-2">
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#trademark-list">
+                <div class="toc-text"><span class="toc-text-inner">Mark list</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#trademark-usage">
+                <div class="toc-text"><span class="toc-text-inner">Usage</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#trademark-reference">
+                <div class="toc-text"><span class="toc-text-inner">Reference</span></div>
+              </a>
+            </li>
+            <li class="toc-item" data-level="h3">
+              <a class="toc-a" href="index.html#trademark-attribution">
+                <div class="toc-text"><span class="toc-text-inner">Attribution</span></div>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Downloads -->
+        <li class="toc-group flex flex-col mt-2">
+          <div class="toc-item active" data-level="h2">
+            <a class="toc-a" href="downloads.html">
+              <div class="toc-text"><span class="toc-text-inner">Downloads</span></div>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <button onclick="toggleDarkMode()"
+              class="dark-toggle-btn mt-5 flex items-center gap-1.5 hover:text-red-500 transition-colors"
+              style="color:#7a7a7a;font-size:12px;line-height:1;cursor:pointer;"
+              aria-label="Switch to dark mode">
+        <svg class="dark-toggle-moon w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="dark-toggle-sun w-3.5 h-3.5 shrink-0 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <main class="flex-1 pt-header">
+
+    <section class="bg-white">
+      <div class="container-fluid pt-20 pb-16 md:pt-28 md:pb-24 xl:pt-36 xl:pb-32 flex flex-col gap-8">
+
+        <div class="flex flex-col gap-3 max-w-[640px]">
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Downloads</h2>
+          <p class="text-[20px] leading-[1.4]">Logos, fonts, color palettes, and icons.</p>
+        </div>
+
+        <div class="flex flex-col max-w-[760px]">
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Logomark</p>
+              <p class="text-sm leading-[1.5] text-gray-500">The LM monogram in black, red, and white. SVG and PNG.</p>
+            </div>
+            <a href="assets/logos/lm-logomark.zip" download class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Wordmark</p>
+              <p class="text-sm leading-[1.5] text-gray-500">The Lightmatter wordmark in black, red, and white. SVG and PNG.</p>
+            </div>
+            <a href="assets/logos/lm-wordmark.zip" download class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Product logos</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Guide and Passage logos in all color variants and formats — SVG, PNG, JPG, PDF.</p>
+            </div>
+            <a href="assets/logos/lm-product-logos.zip" download class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Inference Sans</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Display typeface for headlines, large-scale type, and the logo.</p>
+            </div>
+            <a href="assets/fonts/inference-sans.zip" download class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Object Sans</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Text typeface for sub-headlines, body copy, captions, and UI.</p>
+            </div>
+            <a href="assets/fonts/object-sans.zip" download class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Adobe ASE</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Color swatch library for Illustrator, InDesign, and Photoshop.</p>
+            </div>
+            <button type="button" onclick="downloadColorASE()" class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">PowerPoint theme</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Color scheme file (.thmx) for Microsoft Office — PowerPoint, Word, and Excel.</p>
+            </div>
+            <button type="button" onclick="downloadColorTHMX()" class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Color reference</p>
+              <p class="text-sm leading-[1.5] text-gray-500">Printable HTML reference with hex, RGB, CMYK, and PMS values.</p>
+            </div>
+            <button type="button" onclick="downloadColorRef()" class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4 py-5 border-b border-gray-200">
+            <div class="flex-1 flex flex-col gap-1">
+              <p class="font-medium text-base text-gray-900">Icon set</p>
+              <p class="text-sm leading-[1.5] text-gray-500">37 icons in Lightmatter's 8-bit style, SVG format.</p>
+            </div>
+            <button type="button" onclick="downloadIconBundle()" class="cta-blue px-4 py-2 text-sm font-medium shrink-0 w-28 self-start sm:self-center">Download</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-gray-900 text-white">
+    <div class="container-fluid py-16 flex flex-col gap-8">
+      <a href="index.html#top" class="block w-[56px]"><img src="assets/images/logos/lm-logomark-white.png" alt="Lightmatter" width="56" height="28"></a>
+      <p class="text-sm text-gray-500">&copy; 2026 Lightmatter</p>
+    </div>
+  </footer>
+
+  <script src="assets/icon-svg-data.js"></script>
+  <script>
+    // ── Password gate ─────────────────────────────────────────────────────
+    // NOTE: this is a light deterrent, not real security — the password lives
+    // in the page and a determined visitor can bypass it. To change it, edit
+    // the PASSWORD value below.
+    (function () {
+      var PASSWORD = 'Lightmatter!';            // ← set the download password here
+      var KEY = 'lm-downloads-auth';
+      var gate  = document.getElementById('pw-gate');
+      var form  = document.getElementById('pw-form');
+      var input = document.getElementById('pw-input');
+      var error = document.getElementById('pw-error');
+      if (!gate || !form) return;
+
+      var authed = false;
+      try { authed = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+
+      function unlock() {
+        gate.classList.add('is-hidden');
+        document.documentElement.classList.add('lm-authed');
+      }
+
+      if (authed) {
+        unlock();
+      } else if (input) {
+        input.focus();
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (input.value === PASSWORD) {
+          try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+          error.classList.add('hidden');
+          unlock();
+        } else {
+          error.classList.remove('hidden');
+          input.value = '';
+          input.focus();
+        }
+      });
+    })();
+
+    // ── TOC rail ──────────────────────────────────────────────────────────
+    (function () {
+      var postTocInner = document.querySelector('.post-toc-inner');
+      var tocRail      = document.getElementById('toc-rail');
+      var tocLinks     = document.querySelectorAll('.toc-a');
+
+      function initDimensions() {
+        tocLinks.forEach(function (link) {
+          var textInner = link.querySelector('.toc-text-inner');
+          if (textInner) {
+            var height = link.offsetHeight || 22;
+            link.style.setProperty('--expanded-link-height', height + 'px');
+          }
+        });
+      }
+      function measureSubListHeights() {
+        if (!postTocInner) return;
+        postTocInner.classList.add('toc-measuring', 'toc-hover');
+        document.querySelectorAll('.toc-sub-list').forEach(function (list) {
+          var h = list.scrollHeight;
+          if (h > 0) list.style.setProperty('--toc-sub-list-height', (h + 2) + 'px');
+        });
+        postTocInner.classList.remove('toc-measuring', 'toc-hover');
+      }
+      window.addEventListener('load', function () { initDimensions(); measureSubListHeights(); });
+      initDimensions();
+      measureSubListHeights();
+      if (postTocInner) postTocInner.style.opacity = '1';
+
+      if (tocRail && postTocInner) {
+        var collapseTimer;
+        tocRail.addEventListener('mouseenter', function () {
+          clearTimeout(collapseTimer);
+          postTocInner.classList.add('toc-hover');
+        });
+        tocRail.addEventListener('mouseleave', function () {
+          collapseTimer = setTimeout(function () {
+            postTocInner.classList.remove('toc-hover');
+          }, 250);
+        });
+      }
+    })();
+
+    // ── Dark mode ─────────────────────────────────────────────────────────
+    function toggleDarkMode() {
+      var isDark = document.documentElement.classList.toggle('dark');
+      document.querySelectorAll('.dark-toggle-moon').forEach(function (el) { el.classList.toggle('hidden', isDark); });
+      document.querySelectorAll('.dark-toggle-sun').forEach(function (el) { el.classList.toggle('hidden', !isDark); });
+      document.querySelectorAll('.dark-toggle-btn').forEach(function (el) {
+        el.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      });
+    }
+
+    // ── Mobile menu ───────────────────────────────────────────────────────
+    (function () {
+      var btn  = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      var iconOpen  = btn.querySelector('.icon-open');
+      var iconClose = btn.querySelector('.icon-close');
+      function setOpen(open) {
+        menu.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+      }
+      btn.addEventListener('click', function () { setOpen(!menu.classList.contains('is-open')); });
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+      document.addEventListener('click', function (e) {
+        if (!menu.classList.contains('is-open')) return;
+        if (menu.contains(e.target) || btn.contains(e.target)) return;
+        setOpen(false);
+      });
+    })();
+
+    // ── Icon bundle ───────────────────────────────────────────────────────
+    (function () {
+      function enc(s) { return typeof TextEncoder !== 'undefined' ? Array.from(new TextEncoder().encode(s)) : s.split('').map(function (c) { return c.charCodeAt(0) & 255; }); }
+      function crc32(bytes) {
+        var t = [], c; for (var n = 0; n < 256; n++) { c = n; for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); t[n] = c; }
+        var r = 0xFFFFFFFF; for (var i = 0; i < bytes.length; i++) r = (r >>> 8) ^ t[(r ^ bytes[i]) & 255]; return (r ^ 0xFFFFFFFF) >>> 0;
+      }
+      function u16(n) { return [n & 255, (n >> 8) & 255]; }
+      function u32(n) { return [n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >> 24) & 255]; }
+      function buildZip(files) {
+        var out = [], cds = [], off = 0;
+        files.forEach(function (f) {
+          var nb = f.name.split('').map(function (c) { return c.charCodeAt(0); });
+          var crc = crc32(f.data), sz = f.data.length;
+          var lh = [0x50,0x4B,0x03,0x04].concat(u16(20)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(crc)).concat(u32(sz)).concat(u32(sz)).concat(u16(nb.length)).concat(u16(0)).concat(nb);
+          cds.push([0x50,0x4B,0x01,0x02].concat(u16(20)).concat(u16(20)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(crc)).concat(u32(sz)).concat(u32(sz)).concat(u16(nb.length)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(0)).concat(u32(off)).concat(nb));
+          off += lh.length + sz;
+          out = out.concat(lh).concat(f.data);
+        });
+        var cdStart = out.length;
+        cds.forEach(function (cd) { out = out.concat(cd); });
+        var cdSz = out.length - cdStart;
+        out = out.concat([0x50,0x4B,0x05,0x06]).concat(u16(0)).concat(u16(0)).concat(u16(files.length)).concat(u16(files.length)).concat(u32(cdSz)).concat(u32(cdStart)).concat(u16(0));
+        return new Uint8Array(out);
+      }
+      function dl(blob, fn) {
+        var u = URL.createObjectURL(blob), a = document.createElement('a');
+        a.href = u; a.download = fn; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
+      }
+      window.downloadIconBundle = function () {
+        var src = window.iconSvgSource;
+        if (!src || !Object.keys(src).length) { alert('Icon data not available.'); return; }
+        var files = Object.keys(src).map(function (path) { return { name: path.split('/').pop(), data: enc(src[path]) }; });
+        dl(new Blob([buildZip(files)], { type: 'application/octet-stream' }), 'lightmatter-icons.zip');
+      };
+    })();
+
+    // ── Palette downloads ──────────────────────────────────────────────────
+    (function () {
+      var P = {
+        primary:   [{name:'Red',r:255,g:51,b:0},{name:'Black',r:0,g:0,b:0},{name:'White',r:255,g:255,b:255}],
+        secondary: [{name:'Cyan',r:0,g:231,b:231},{name:'Blue',r:0,g:51,b:255},{name:'Purple',r:115,g:0,b:255},{name:'Magenta',r:255,g:0,b:219}],
+        greys:     [{name:'Light Grey',r:238,g:238,b:238},{name:'Medium Grey',r:212,g:212,b:212},{name:'Dark Grey',r:187,g:187,b:187}]
+      };
+      var RAMPS = [
+        {name:'Red',     colors:[{name:'Red 100',r:255,g:214,b:204},{name:'Red 200',r:255,g:173,b:153},{name:'Red 300',r:255,g:112,b:76},{name:'Red 400',r:255,g:51,b:0},{name:'Red 500',r:204,g:40,b:0},{name:'Red 600',r:153,g:30,b:0},{name:'Red 700',r:102,g:20,b:0}]},
+        {name:'Cyan',    colors:[{name:'Cyan 100',r:204,g:250,b:250},{name:'Cyan 200',r:153,g:245,b:245},{name:'Cyan 300',r:76,g:238,b:238},{name:'Cyan 400',r:0,g:231,b:231},{name:'Cyan 500',r:0,g:184,b:184},{name:'Cyan 600',r:0,g:138,b:138},{name:'Cyan 700',r:0,g:92,b:92}]},
+        {name:'Blue',    colors:[{name:'Blue 100',r:204,g:214,b:255},{name:'Blue 200',r:153,g:173,b:255},{name:'Blue 300',r:76,g:112,b:255},{name:'Blue 400',r:0,g:51,b:255},{name:'Blue 500',r:0,g:40,b:204},{name:'Blue 600',r:0,g:30,b:153},{name:'Blue 700',r:0,g:20,b:102}]},
+        {name:'Purple',  colors:[{name:'Purple 100',r:227,g:204,b:255},{name:'Purple 200',r:199,g:153,b:255},{name:'Purple 300',r:157,g:76,b:255},{name:'Purple 400',r:115,g:0,b:255},{name:'Purple 500',r:92,g:0,b:204},{name:'Purple 600',r:69,g:0,b:153},{name:'Purple 700',r:46,g:0,b:102}]},
+        {name:'Magenta', colors:[{name:'Magenta 100',r:255,g:204,b:247},{name:'Magenta 200',r:255,g:153,b:240},{name:'Magenta 300',r:255,g:76,b:229},{name:'Magenta 400',r:255,g:0,b:219},{name:'Magenta 500',r:204,g:0,b:175},{name:'Magenta 600',r:153,g:0,b:131},{name:'Magenta 700',r:102,g:0,b:87}]},
+        {name:'Grey',    colors:[{name:'Grey 100',r:249,g:249,b:249},{name:'Grey 200',r:238,g:238,b:238},{name:'Grey 300',r:212,g:212,b:212},{name:'Grey 400',r:187,g:187,b:187},{name:'Grey 500',r:117,g:117,b:117},{name:'Grey 600',r:51,g:51,b:51},{name:'Grey 700',r:17,g:17,b:17}]},
+        {name:'Cool Grey',colors:[{name:'Cool Grey 100',r:245,g:246,b:250},{name:'Cool Grey 200',r:230,g:232,b:240},{name:'Cool Grey 300',r:198,g:202,b:216},{name:'Cool Grey 400',r:168,g:173,b:194},{name:'Cool Grey 500',r:105,g:109,b:126},{name:'Cool Grey 600',r:46,g:49,b:61},{name:'Cool Grey 700',r:21,g:22,b:27}]}
+      ];
+      var PMS  = {Red:'PMS 172 C',Black:'PMS Black 6 C',Cyan:'PMS 3115 C',Blue:'PMS 2728 C',Purple:'PMS 266 C',Magenta:'PMS Rhodamine Red C','Light Grey':'PMS 663 C','Medium Grey':'PMS 427 C','Dark Grey':'PMS Cool Gray 4 C'};
+      var CMYK = {Red:'0 80 98 0',Black:'75 68 67 90',White:'0 0 0 0',Cyan:'70 0 13 0',Blue:'99 76 0 0',Purple:'71 88 0 0',Magenta:'5 92 0 0','Light Grey':'5 6 0 0','Medium Grey':'14 8 4 0','Dark Grey':'24 17 15 0'};
+      function hx(n) { return ('0'+n.toString(16).toUpperCase()).slice(-2); }
+      function hexStr(c) { return hx(c.r)+hx(c.g)+hx(c.b); }
+      function dl(blob, fn) { var u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u); }
+
+      window.downloadColorASE = function () {
+        function u16(n){return[(n>>8)&255,n&255];} function u32(n){return[(n>>>24)&255,(n>>16)&255,(n>>8)&255,n&255];}
+        function f32(f){var b=new ArrayBuffer(4);new DataView(b).setFloat32(0,f,false);return Array.from(new Uint8Array(b));}
+        function uname(s){var b=[];for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);b.push((c>>8)&255,c&255);}b.push(0,0);return b;}
+        var groups=[{name:'Primary',colors:P.primary},{name:'Secondary',colors:P.secondary},{name:'Greys',colors:P.greys}].concat(RAMPS.map(function(r){return {name:r.name+' Ramp',colors:r.colors};}));
+        var blocks=[],out=[65,83,69,70,0,1,0,0];
+        groups.forEach(function(g){var gn=uname(g.name);blocks.push({t:0xC001,d:u16(gn.length/2).concat(gn)});g.colors.forEach(function(c){var cn=uname(c.name);blocks.push({t:0x0001,d:u16(cn.length/2).concat(cn).concat([82,71,66,32]).concat(f32(c.r/255)).concat(f32(c.g/255)).concat(f32(c.b/255)).concat(u16(0))});});blocks.push({t:0xC002,d:[]});});
+        out=out.concat(u32(blocks.length));blocks.forEach(function(b){out=out.concat(u16(b.t)).concat(u32(b.d.length)).concat(b.d);});
+        dl(new Blob([new Uint8Array(out)],{type:'application/octet-stream'}),'lightmatter-colors.ase');
+      };
+
+      window.downloadColorTHMX = function () {
+        function enc(s){return typeof TextEncoder!=='undefined'?Array.from(new TextEncoder().encode(s)):s.split('').map(function(c){return c.charCodeAt(0)&255;});}
+        function crc32(bytes){var t=[],c;for(var n=0;n<256;n++){c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c;}var r=0xFFFFFFFF;for(var i=0;i<bytes.length;i++)r=(r>>>8)^t[(r^bytes[i])&255];return(r^0xFFFFFFFF)>>>0;}
+        function u16(n){return[n&255,(n>>8)&255];} function u32(n){return[n&255,(n>>8)&255,(n>>16)&255,(n>>24)&255];}
+        var theme='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Lightmatter"><a:themeElements><a:clrScheme name="Lightmatter"><a:dk1><a:srgbClr val="000000"/></a:dk1><a:lt1><a:srgbClr val="FFFFFF"/></a:lt1><a:dk2><a:srgbClr val="111111"/></a:dk2><a:lt2><a:srgbClr val="EEEEEE"/></a:lt2><a:accent1><a:srgbClr val="FF3300"/></a:accent1><a:accent2><a:srgbClr val="00E7E7"/></a:accent2><a:accent3><a:srgbClr val="0033FF"/></a:accent3><a:accent4><a:srgbClr val="7300FF"/></a:accent4><a:accent5><a:srgbClr val="FF00DB"/></a:accent5><a:accent6><a:srgbClr val="D4D4D4"/></a:accent6><a:hlink><a:srgbClr val="FF3300"/></a:hlink><a:folHlink><a:srgbClr val="BBBBBB"/></a:folHlink></a:clrScheme><a:fontScheme name="Lightmatter"><a:majorFont><a:latin typeface="Inference Sans"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="Object Sans"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme><a:fmtScheme name="Office"><a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0"><a:schemeClr val="phClr"><a:tint val="50000"/><a:satMod val="300000"/></a:schemeClr></a:gs><a:gs pos="35000"><a:schemeClr val="phClr"><a:tint val="37000"/><a:satMod val="300000"/></a:schemeClr></a:gs><a:gs pos="100000"><a:schemeClr val="phClr"><a:tint val="15000"/><a:satMod val="350000"/></a:schemeClr></a:gs></a:gsLst><a:lin ang="16200000" scaled="1"/></a:gradFill><a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0"><a:schemeClr val="phClr"><a:shade val="51000"/><a:satMod val="130000"/></a:schemeClr></a:gs><a:gs pos="80000"><a:schemeClr val="phClr"><a:shade val="93000"/><a:satMod val="130000"/></a:schemeClr></a:gs><a:gs pos="100000"><a:schemeClr val="phClr"><a:shade val="94000"/><a:satMod val="135000"/></a:schemeClr></a:gs></a:gsLst><a:lin ang="16200000" scaled="0"/></a:gradFill></a:fillStyleLst><a:lnStyleLst><a:ln w="6350" cap="flat" cmpd="sng" algn="ctr"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln><a:ln w="12700" cap="flat" cmpd="sng" algn="ctr"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln><a:ln w="19050" cap="flat" cmpd="sng" algn="ctr"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln></a:lnStyleLst><a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst><a:outerShdw blurRad="40000" dist="23000" dir="5400000" rotWithShape="0"><a:srgbClr val="000000"><a:alpha val="35000"/></a:srgbClr></a:outerShdw></a:effectLst></a:effectStyle></a:effectStyleLst><a:bgFillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"><a:tint val="95000"/><a:satMod val="170000"/></a:schemeClr></a:solidFill><a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0"><a:schemeClr val="phClr"><a:tint val="93000"/><a:satMod val="150000"/></a:schemeClr></a:gs><a:gs pos="50000"><a:schemeClr val="phClr"><a:tint val="98000"/><a:satMod val="130000"/></a:schemeClr></a:gs><a:gs pos="100000"><a:schemeClr val="phClr"><a:shade val="63000"/><a:satMod val="120000"/></a:schemeClr></a:gs></a:gsLst><a:lin ang="16200000" scaled="0"/></a:gradFill></a:bgFillStyleLst></a:fmtScheme></a:themeElements></a:theme>';
+        var ct='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/></Types>';
+        var rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="theme/theme1.xml"/></Relationships>';
+        var files=[{name:'[Content_Types].xml',data:enc(ct)},{name:'_rels/.rels',data:enc(rels)},{name:'theme/theme1.xml',data:enc(theme)}];
+        var out=[],cds=[],off=0;
+        files.forEach(function(f){var nb=f.name.split('').map(function(c){return c.charCodeAt(0);}),crc=crc32(f.data),sz=f.data.length;var lh=[0x50,0x4B,0x03,0x04].concat(u16(20)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(crc)).concat(u32(sz)).concat(u32(sz)).concat(u16(nb.length)).concat(u16(0)).concat(nb);cds.push([0x50,0x4B,0x01,0x02].concat(u16(20)).concat(u16(20)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(crc)).concat(u32(sz)).concat(u32(sz)).concat(u16(nb.length)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u16(0)).concat(u32(0)).concat(u32(off)).concat(nb));off+=lh.length+sz;out=out.concat(lh).concat(f.data);});
+        var cdStart=out.length;cds.forEach(function(cd){out=out.concat(cd);});var cdSz=out.length-cdStart;
+        out=out.concat([0x50,0x4B,0x05,0x06]).concat(u16(0)).concat(u16(0)).concat(u16(files.length)).concat(u16(files.length)).concat(u32(cdSz)).concat(u32(cdStart)).concat(u16(0));
+        dl(new Blob([new Uint8Array(out)],{type:'application/octet-stream'}),'lightmatter-theme.thmx');
+      };
+
+      window.downloadColorRef = function () {
+        var groups=[{title:'Primary',colors:P.primary},{title:'Secondary',colors:P.secondary},{title:'Greys',colors:P.greys}];
+        function isLight(c){return(c.r*299+c.g*587+c.b*114)/1000>186;}
+        var body=groups.map(function(g){return '<section><h2>'+g.title+'</h2><div class="row">'+g.colors.map(function(c){var h=hexStr(c),fg=isLight(c)?'#000':'#fff';return '<div class="card"><div class="chip" style="background:#'+h+';color:'+fg+'"><span>'+c.name+'</span></div><div class="vals">'+(PMS[c.name]?'<p class="pms">'+PMS[c.name]+'</p>':'')+'<p>#'+h+'</p><p>RGB '+c.r+' '+c.g+' '+c.b+'</p>'+(CMYK[c.name]?'<p>CMYK '+CMYK[c.name]+'</p>':'')+'</div></div>';}).join('')+'</div></section>';}).join('');
+        var rampBody='<section><h2>Tints &amp; Shades</h2>'+RAMPS.map(function(ramp){return '<div style="margin-bottom:16px"><p style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#bbb;margin-bottom:6px">'+ramp.name+'</p><div style="display:flex;gap:4px">'+ramp.colors.map(function(c){var h=hexStr(c);return '<div style="flex:1;min-width:0"><div style="height:48px;background:#'+h+';border:1px solid rgba(0,0,0,.06)"></div><p style="font-size:9px;color:#777;margin-top:4px;font-family:monospace">'+h+'</p></div>';}).join('')+'</div></div>';}).join('')+'</section>';
+        var html='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Lightmatter — Color Reference</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,-apple-system,sans-serif;background:#fff;color:#111;padding:48px 56px;max-width:960px;margin:0 auto}header{border-bottom:2px solid #000;padding-bottom:14px;margin-bottom:48px}header h1{font-size:18px;font-weight:600;letter-spacing:-0.3px}section{margin-bottom:40px}h2{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:14px}.row{display:flex;flex-wrap:wrap;gap:12px}.card{width:160px}.chip{height:96px;display:flex;align-items:flex-end;padding:10px 12px;border:1px solid rgba(0,0,0,.06)}.chip span{font-size:13px;font-weight:500}.vals{padding:10px 0 0;display:flex;flex-direction:column;gap:3px}.vals p{font-size:11px;color:#555;line-height:1.5}.vals .pms{font-weight:600;color:#111}@media print{body{padding:24px 32px}@page{margin:.5in}}</style></head><body><header><h1>Lightmatter Color Reference</h1></header>'+body+rampBody+'</body></html>';
+        dl(new Blob([html],{type:'text/html'}),'lightmatter-color-reference.html');
+      };
+    })();
+  </script>
+
+</body>
+</html>

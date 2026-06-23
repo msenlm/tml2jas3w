@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[PROTOTYPE] Brand · Lightmatter (Side Nav)</title>
+  <title>[PROTOTYPE] Lightmatter Brand Guidelines</title>
   <meta name="robots" content="noindex, nofollow">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +60,7 @@
     @media (min-width:1024px){ .container-fluid{ padding-left:96px; padding-right:96px; } }
     @media (min-width:1280px){ .container-fluid{ padding-left:220px; padding-right:182px; } }
 
-    .nav-link { font-size:14px; letter-spacing:0.04em; line-height:1; color:#111; text-decoration:none; transition:color .15s; }
+    .nav-link { font-size:13px; letter-spacing:0.02em; line-height:1; color:#111; text-decoration:none; transition:color .15s; }
     .nav-link:hover { color:#FF3300; }
     .nav-link.active { color:#FF3300; }
 
@@ -287,6 +287,7 @@
     html.dark .nav-link-mobile { color: #ccc; border-top-color: #222; }
     html.dark .nav-link-mobile:hover, html.dark .nav-link-mobile.active { color: #FF3300; }
     html.dark .hover\:text-red-500:hover { color: #FF3300 !important; }
+    html.dark #dark-toggle, html.dark #menu-toggle { color: #fff; }
     html.dark .cta-blue              { color: #fff; border-color: #fff; }
     html.dark .cta-blue:hover        { background-color: #fff; color: #000; border-color: #fff; }
     html.dark #attribution-copy          { color: #fff; border-color: #fff; }
@@ -322,7 +323,7 @@
           <img width="48" height="24" src="assets/images/logos/lm-logomark-red.svg" alt="Lightmatter">
         </a>
         <!-- Header nav: fills in below 2xl, where the side rail is hidden -->
-        <nav class="hidden md:flex xl:hidden items-center gap-6 lg:gap-9" aria-label="Sections">
+        <nav class="hidden md:flex xl:hidden items-center gap-4" aria-label="Sections">
           <a class="nav-link" href="#logo">Logo</a>
           <a class="nav-link" href="#color">Color</a>
           <a class="nav-link" href="#type">Type</a>
@@ -330,9 +331,10 @@
           <a class="nav-link" href="#photography">Imagery</a>
           <a class="nav-link" href="#voice">Voice</a>
           <a class="nav-link" href="#trademarks">Trademarks</a>
+          <a class="nav-link" href="downloads.html">Downloads</a>
         </nav>
         <!-- Right controls: dark mode toggle (always) + hamburger (mobile only) -->
-        <div class="flex items-center gap-1 shrink-0">
+        <div class="flex items-center gap-3 shrink-0">
           <button id="dark-toggle" type="button" onclick="toggleDarkMode()"
                   class="dark-toggle-btn xl:hidden -m-2 p-2 text-gray-900 hover:text-red-500 transition-colors"
                   aria-label="Switch to dark mode">
@@ -360,6 +362,7 @@
         <a class="nav-link-mobile" href="#photography">Imagery</a>
         <a class="nav-link-mobile" href="#voice">Voice</a>
         <a class="nav-link-mobile" href="#trademarks">Trademarks</a>
+        <a class="nav-link-mobile" href="downloads.html">Downloads</a>
       </nav>
     </div>
   </header>
@@ -526,6 +529,15 @@
             </li>
           </ul>
         </li>
+
+        <!-- Downloads -->
+        <li class="toc-group flex flex-col mt-2">
+          <div class="toc-item" data-level="h2">
+            <a class="toc-a" href="downloads.html">
+              <div class="toc-text"><span class="toc-text-inner">Downloads</span></div>
+            </a>
+          </div>
+        </li>
       </ul>
       <button onclick="toggleDarkMode()"
               class="dark-toggle-btn mt-5 flex items-center gap-1.5 hover:text-red-500 transition-colors"
@@ -547,7 +559,7 @@
     <section id="brand-guidelines" class="bg-white">
       <div class="container-fluid pt-20 pb-16 md:pt-28 md:pb-24 xl:pt-36 xl:pb-32">
         <p class="eyebrow">Updated June 2026</p>
-        <h1 class="font-display font-normal text-[64px] leading-[0.95] lg:text-6xl xl:text-7xl mt-6 tracking-[-2px]">Brand<br>Guidelines</h1>
+        <h1 class="font-display font-normal text-[40px] md:text-[64px] leading-[0.95] lg:text-6xl xl:text-7xl mt-6 tracking-[-2px]">Brand<br>Guidelines</h1>
         <div class="text-[25px] leading-[1.35] max-w-[760px] mt-8 flex flex-col gap-5">
           <p>This brand guidelines page provides an outline of the visual and verbal elements within the Lightmatter Brand.</p>
           <p>It is a living, breathing page that helps explain how the various elements within the identity should be used through examples and applications. By following these guidelines, we can ensure all creative work feels cohesive.</p>
@@ -575,8 +587,9 @@
     <section id="logo" class="bg-gray-100">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-16 md:gap-20">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Logo</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Logo</h2>
           <p class="text-[20px] leading-[1.4]">Lightmatter’s wordmark and monogram closely aligns with the behavior of photonic computing through a typographic interpretation on inference. The aesthetic of the custom type in the letters “L” and “M” resemble a unique yet familiar form when compared to their native letterform. It intrigues our minds to make the connection, straddling both the familiar with the unfamiliar. Further, it helps us recognize how the unknown can be realized.</p>
+          <a href="downloads.html" class="cta-blue self-start px-3.5 py-2 text-sm font-medium">Download</a>
         </div>
 
         <!-- Logomark -->
@@ -744,8 +757,9 @@
     <section id="color" class="bg-white">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Color</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Color</h2>
           <p class="text-[20px] leading-[1.4]">Using color for the identity is not subjective. It’s an important element within the Lightmatter identity. Our colors are a defining aspect of our brand and help us stand out in our field. In addition to the neutral colors, we have a range of distinctive secondary and tertiary colors that add vibrancy and dynamism to support our primary palette. To be effective, one needs to follow the established usages.</p>
+          <a href="downloads.html" class="cta-blue self-start px-3.5 py-2 text-sm font-medium">Download</a>
         </div>
 
         <!-- Primary -->
@@ -885,7 +899,7 @@
           </div>
           <div class="flex flex-col gap-5">
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FFD6CC"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Red 100</p><button type="button" data-copy="FFD6CC" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FFD6CC</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FFAD99"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Red 200</p><button type="button" data-copy="FFAD99" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FFAD99</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FF704C"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Red 300</p><button type="button" data-copy="FF704C" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FF704C</button></div></div>
@@ -896,7 +910,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#CCFAFA"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cyan 100</p><button type="button" data-copy="CCFAFA" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">CCFAFA</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#99F5F5"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cyan 200</p><button type="button" data-copy="99F5F5" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">99F5F5</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#4CEEEE"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cyan 300</p><button type="button" data-copy="4CEEEE" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">4CEEEE</button></div></div>
@@ -907,7 +921,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#CCD6FF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Blue 100</p><button type="button" data-copy="CCD6FF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">CCD6FF</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#99ADFF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Blue 200</p><button type="button" data-copy="99ADFF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">99ADFF</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#4C70FF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Blue 300</p><button type="button" data-copy="4C70FF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">4C70FF</button></div></div>
@@ -918,7 +932,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#E3CCFF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Purple 100</p><button type="button" data-copy="E3CCFF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">E3CCFF</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#C799FF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Purple 200</p><button type="button" data-copy="C799FF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">C799FF</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#9D4CFF"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Purple 300</p><button type="button" data-copy="9D4CFF" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">9D4CFF</button></div></div>
@@ -929,7 +943,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FFCCF7"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Magenta 100</p><button type="button" data-copy="FFCCF7" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FFCCF7</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FF99F0"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Magenta 200</p><button type="button" data-copy="FF99F0" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FF99F0</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#FF4CE5"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Magenta 300</p><button type="button" data-copy="FF4CE5" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">FF4CE5</button></div></div>
@@ -940,7 +954,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#F9F9F9"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 100</p><button type="button" data-copy="F9F9F9" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">F9F9F9</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#EEEEEE"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 200</p><button type="button" data-copy="EEEEEE" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">EEEEEE</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#D4D4D4"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 300</p><button type="button" data-copy="D4D4D4" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">D4D4D4</button></div></div>
@@ -951,7 +965,7 @@
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <div class="grid grid-cols-7 gap-2">
+              <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#F5F6FA"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cool grey 100</p><button type="button" data-copy="F5F6FA" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">F5F6FA</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#E6E8F0"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cool grey 200</p><button type="button" data-copy="E6E8F0" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">E6E8F0</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#C6CAD8"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Cool grey 300</p><button type="button" data-copy="C6CAD8" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">C6CAD8</button></div></div>
@@ -963,20 +977,6 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap gap-2.5">
-          <button type="button" onclick="downloadColorASE()" class="cta-blue px-3.5 py-2 text-sm font-medium">
-            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Adobe ASE
-          </button>
-          <button type="button" onclick="downloadColorTHMX()" class="cta-blue px-3.5 py-2 text-sm font-medium">
-            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            PowerPoint swatches
-          </button>
-          <button type="button" onclick="downloadColorRef()" class="cta-blue px-3.5 py-2 text-sm font-medium">
-            <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Reference sheet
-          </button>
-        </div>
       </div>
     </section>
 
@@ -984,8 +984,9 @@
     <section id="type" class="bg-gray-100">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Type</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Type</h2>
           <p class="text-[20px] leading-[1.4]">Two typefaces carry the brand. <span class="font-medium">Inference Sans</span> is our ownable display face for headlines and big brand moments; <span class="font-medium">Object Sans</span> does everything else: sub-headlines, body copy, captions, and UI.</p>
+          <a href="downloads.html" class="cta-blue self-start px-3.5 py-2 text-sm font-medium">Download</a>
         </div>
 
         <!-- Inference Sans — primary / display -->
@@ -993,10 +994,7 @@
           <p class="h4 pb-4">Primary typeface</p>
           <div class="bg-white p-8 md:p-10 flex flex-col gap-8">
             <div class="flex flex-col gap-4">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="font-sans font-medium text-2xl tracking-[-1px] leading-[1.1]">Inference Sans</h3>
-                <a href="assets/fonts/inference-sans.zip" download class="cta-blue px-3.5 py-2 text-sm font-medium shrink-0">Download ZIP</a>
-              </div>
+              <h3 class="font-sans font-medium text-2xl tracking-[-1px] leading-[1.1]">Inference Sans</h3>
               <p class="text-base leading-[1.5] max-w-[640px]">Our ownable, unique typeface: a playful interpretation of inference, replacing letters with distinct forms and glyphs. Use it for headlines, large-scale typography, and the logo. <span class="font-medium">Never set it as body copy, or in sentences longer than 10 words.</span></p>
             </div>
             <div class="flex flex-col divide-y divide-gray-200">
@@ -1025,10 +1023,7 @@
           <p class="h4 pb-4">Secondary typeface</p>
           <div class="bg-white p-8 md:p-10 flex flex-col gap-8">
             <div class="flex flex-col gap-4">
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="font-sans font-medium text-2xl tracking-[-1px] leading-[1.1]">Object Sans</h3>
-                <a href="assets/fonts/object-sans.zip" download class="cta-blue px-3.5 py-2 text-sm font-medium shrink-0">Download ZIP</a>
-              </div>
+              <h3 class="font-sans font-medium text-2xl tracking-[-1px] leading-[1.1]">Object Sans</h3>
               <p class="text-base leading-[1.5] max-w-[640px]">Our secondary typeface, with characteristics close to Inference Sans. It carries everything else: sub-headlines, body copy, captions, and UI. <span class="font-medium">Don’t use it for hero or big brand moments.</span></p>
             </div>
             <div class="flex flex-col divide-y divide-gray-200">
@@ -1046,7 +1041,6 @@
             <div class="flex flex-col gap-4">
               <div class="flex items-baseline justify-between gap-4">
                 <h3 class="font-sans font-medium text-2xl tracking-[-1px] leading-[1.1]">DM Sans</h3>
-                <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noopener" class="cta-blue px-3.5 py-2 text-sm font-medium shrink-0">Google Fonts ↗</a>
               </div>
               <p class="text-base leading-[1.5] max-w-[640px]">Use DM Sans in Google Workspace products — Slides, Docs, Sheets — where Object Sans is unavailable. It shares a similar geometric, neutral character. <span class="font-medium">Not for use outside of Google products.</span></p>
             </div>
@@ -1111,8 +1105,9 @@
     <section id="icons" class="bg-white">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Icons</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Icons</h2>
           <p class="text-[20px] leading-[1.4]">In line with our personality, all Lightmatter iconography uses an 8-bit style. Keep details to a minimum. Simplicity makes each icon’s meaning easier to understand. Use icons thoughtfully and intentionally. They are mainly for internal programs and product UI. Use them to support navigation or explain an idea. Do not use them as casual decoration or as a default replacement for other visuals. Do not use them in external marketing unless approved.</p>
+          <a href="downloads.html" class="cta-blue self-start px-3.5 py-2 text-sm font-medium">Download</a>
         </div>
 
         <div class="icon-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-4">
@@ -1161,7 +1156,7 @@
     <section id="photography" class="bg-gray-100">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Imagery</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Imagery</h2>
           <p class="text-[20px] leading-[1.4]">These four directions are starting points for campaign photography. They are meant to guide image selection, not define an exhaustive or expensive library. Use discretion when choosing imagery. Select high-quality images that feel intentional, ownable, and aligned with the Lightmatter brand. For high-reach campaigns or prominent placements, seek brand approval before use. Each direction should express movement from here to there and the dramatic journey photonics makes possible.</p>
         </div>
 
@@ -1206,7 +1201,7 @@
     <section id="voice" class="bg-white">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Voice</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Voice</h2>
           <p class="text-[20px] leading-[1.4]">Brand voice is how our brand comes to life in the world. It is our personality. It shows up in the language and design we use to tell people who we are and what we are about in a consistent, compelling way.</p>
           <p class="text-[20px] leading-[1.4]">Like any voice, brand voice has range. Consistency is not the same as sameness. Our brand can, and should, stretch to fit different scenarios, contexts, and audiences.</p>
         </div>
@@ -1252,7 +1247,7 @@
     <section id="trademarks" class="bg-gray-100">
       <div class="container-fluid py-24 md:py-36 xl:py-48 flex flex-col gap-12">
         <div class="flex flex-col gap-5 max-w-[760px]">
-          <h2 class="font-display font-normal text-4xl tracking-[-4px] leading-[1.1]">Trademarks</h2>
+          <h2 class="font-display font-normal text-[34px] md:text-4xl tracking-[-1.5px] md:tracking-[-4px] leading-[1.1]">Trademarks</h2>
           <p class="text-[20px] leading-[1.4]">Trademark symbols provide legal notice, but they aren’t required on every instance. Mark the first prominent use in each piece, and let the attribution line handle the rest.</p>
           <p class="text-[20px] leading-[1.4]">The <sup>&reg;</sup> symbol identifies a registered trademark. The <sup>&trade;</sup> symbol identifies an unregistered trademark. Used consistently, they help protect Lightmatter’s brands and technologies.</p>
           <p class="text-[20px] leading-[1.4]">Below is a non-exhaustive list of Lightmatter trademarks.</p>
