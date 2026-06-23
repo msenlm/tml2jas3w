@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html id="top" class="no-js overflow-x-hidden scroll-smooth" lang="en-US">
+<html class="no-js overflow-x-hidden scroll-smooth" lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[PROTOTYPE] Lightmatter Brand Guidelines</title>
+  <title>Lightmatter Brand Guidelines</title>
   <meta name="robots" content="noindex, nofollow">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Inference_Sans.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="assets/fonts/ObjectSans-Regular.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="assets/fonts/ObjectSans-Medium.woff2" as="font" type="font/woff2">
+  <link rel="icon" href="assets/images/logo-lm.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/tailwind-generated.css">
   <link rel="stylesheet" href="assets/css/shared.css">
-  <script src="assets/tailwind.js"></script>
-  <script src="assets/js/tailwind-config.js"></script>
 
   <style>
     .h4 { font-family:'Object Sans',sans-serif; font-size:20px; font-weight:500; line-height:1.1; letter-spacing:0; color:#111; }
@@ -47,7 +50,7 @@
     html.dark main > section:first-child { border-top:none; }
     html.dark #attribution-copy       { color:#fff; border-color:#fff; }
     html.dark #attribution-copy:hover { background-color:#fff; color:#000; }
-    html.dark header a[href="#top"] img { filter:brightness(0) invert(1); }
+    html.dark header a[href="#brand-guidelines"] img { filter:brightness(0) invert(1); }
     html.dark .h4              { color:#e5e5e5; }
     html.dark .voice-highlight { color:#ccc; }
     html.dark .icon-grid img   { filter:invert(1); }
@@ -67,7 +70,7 @@
   <header class="fixed left-0 right-0 top-0 z-50 h-header border-b border-gray-300 bg-white/95 backdrop-blur">
     <div class="container-fluid h-full">
       <div class="h-full flex items-center justify-between gap-6">
-        <a class="flex items-baseline gap-5 shrink-0" href="#top">
+        <a class="flex items-baseline gap-5 shrink-0" href="#brand-guidelines">
           <img width="48" height="24" src="assets/images/logos/lm-logomark-red.svg" alt="Lightmatter">
         </a>
         <!-- Header nav: fills in below 2xl, where the side rail is hidden -->
@@ -116,7 +119,7 @@
   </header>
 
   <aside id="toc-rail" class="post-toc-wrap hidden xl:block fixed -translate-y-1/2 z-40">
-    <div class="post-toc-inner toc-collapsed font-sans opacity-0 transition-opacity duration-200">
+    <div class="post-toc-inner toc-collapsed font-sans">
       <ul class="toc-list flex flex-col gap-2">
         <!-- Hero -->
         <li class="toc-group flex flex-col">
@@ -1154,8 +1157,7 @@
 
   <!-- ── Footer ──────────────────────────────────────────────────────────── -->
   <footer class="bg-gray-900 text-white">
-    <div class="container-fluid py-16 flex flex-col gap-8">
-      <a href="#top" class="block w-[56px]"><img src="assets/images/logos/lm-logomark-white.png" alt="Lightmatter" width="56" height="28"></a>
+    <div class="container-fluid py-16">
       <p class="text-sm text-gray-500">&copy; 2026 Lightmatter</p>
     </div>
   </footer>
@@ -1261,37 +1263,112 @@
       });
     });
 
-    // Photo direction videos: autoplay once when scrolled into view, restart on hover.
-    document.querySelectorAll('[data-hover-video]').forEach(function (card) {
-      const video = card.querySelector('video');
-      if (!video) return;
+    // Photo direction videos: stagger short previews in view, then play intentionally on hover.
+    (function () {
+      const PREVIEW_MS = 7000;
+      const previewCards = Array.from(document.querySelectorAll('[data-hover-video]')).map(function (card) {
+        return { card: card, video: card.querySelector('video'), previewTimer: null, hoverMode: false, isInView: false };
+      }).filter(function (item) { return item.video; });
+      if (!previewCards.length) return;
 
-      function playFrom0() {
-        video.currentTime = 0;
-        const p = video.play();
+      let sequenceTimer = null;
+      let sequenceRun = 0;
+
+      function clearItemTimer(item) {
+        if (item.previewTimer) {
+          clearTimeout(item.previewTimer);
+          item.previewTimer = null;
+        }
+      }
+
+      function clearSequenceTimer() {
+        if (sequenceTimer) {
+          clearTimeout(sequenceTimer);
+          sequenceTimer = null;
+        }
+      }
+
+      function playFrom0(item) {
+        clearItemTimer(item);
+        item.video.currentTime = 0;
+        const p = item.video.play();
         if (p && p.catch) p.catch(function () {});
       }
 
-      // Reset to poster frame when playthrough ends.
-      video.addEventListener('ended', function () { video.currentTime = 0; });
+      function stopPlayback(item) {
+        item.hoverMode = false;
+        clearItemTimer(item);
+        item.video.pause();
+        item.video.currentTime = 0;
+      }
 
-      // Restart from start on hover or keyboard focus.
-      card.addEventListener('mouseenter', playFrom0);
-      card.addEventListener('focusin', playFrom0);
+      function playIntentional(item) {
+        item.hoverMode = true;
+        clearSequenceTimer();
+        sequenceRun += 1;
+        playFrom0(item);
+      }
 
-      // Play when 30% in view; pause and reset when scrolled away.
-      var viewObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            playFrom0();
-          } else {
-            video.pause();
-            video.currentTime = 0;
-          }
+      function runPreviewSequence() {
+        clearSequenceTimer();
+        sequenceRun += 1;
+        const runId = sequenceRun;
+        const itemsInView = previewCards.filter(function (item) { return item.isInView && !item.hoverMode; });
+        if (!itemsInView.length) return;
+
+        itemsInView.forEach(function (item) {
+          clearItemTimer(item);
+          item.video.pause();
+          item.video.currentTime = 0;
         });
-      }, { threshold: 0.3 });
-      viewObserver.observe(card);
-    });
+
+        function playNext(index) {
+          if (runId !== sequenceRun) return;
+          const item = itemsInView[index];
+          if (!item) return;
+          if (!item.isInView || item.hoverMode) {
+            playNext(index + 1);
+            return;
+          }
+          playFrom0(item);
+          item.previewTimer = setTimeout(function () {
+            if (runId !== sequenceRun) return;
+            if (!item.hoverMode) item.video.pause();
+            playNext(index + 1);
+          }, PREVIEW_MS);
+        }
+
+        playNext(0);
+      }
+
+      previewCards.forEach(function (item) {
+        item.video.addEventListener('ended', function () {
+          clearItemTimer(item);
+          item.video.currentTime = 0;
+        });
+
+        item.card.addEventListener('mouseenter', function () { playIntentional(item); });
+        item.card.addEventListener('focusin', function () { playIntentional(item); });
+        item.card.addEventListener('mouseleave', function () {
+          stopPlayback(item);
+        });
+        item.card.addEventListener('focusout', function (event) {
+          if (item.card.contains(event.relatedTarget)) return;
+          stopPlayback(item);
+        });
+
+        var viewObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            item.isInView = entry.isIntersecting;
+            if (!entry.isIntersecting) {
+              stopPlayback(item);
+            }
+          });
+          runPreviewSequence();
+        }, { threshold: 0.3 });
+        viewObserver.observe(item.card);
+      });
+    })();
 
     // Voice example: hovering a phrase or trigger label highlights that voice and fades the rest.
     const voiceHighlights = Array.from(document.querySelectorAll('.voice-highlight'));

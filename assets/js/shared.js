@@ -2,37 +2,6 @@
   function initTocRail() {
     var postTocInner = document.querySelector('.post-toc-inner');
     var tocRail = document.getElementById('toc-rail');
-    var tocLinks = document.querySelectorAll('.toc-a');
-
-    function initDimensions() {
-      tocLinks.forEach(function (link) {
-        var textInner = link.querySelector('.toc-text-inner');
-        if (textInner) {
-          var height = link.offsetHeight || 22;
-          link.style.setProperty('--expanded-link-height', height + 'px');
-        }
-      });
-    }
-
-    function measureSubListHeights() {
-      if (!postTocInner) return;
-      postTocInner.classList.add('toc-measuring', 'toc-hover');
-      document.querySelectorAll('.toc-sub-list').forEach(function (list) {
-        var h = list.scrollHeight;
-        if (h > 0) list.style.setProperty('--toc-sub-list-height', (h + 2) + 'px');
-      });
-      postTocInner.classList.remove('toc-measuring', 'toc-hover');
-    }
-
-    window.addEventListener('load', function () {
-      initDimensions();
-      measureSubListHeights();
-    });
-
-    initDimensions();
-    measureSubListHeights();
-
-    if (postTocInner) postTocInner.style.opacity = '1';
 
     if (tocRail && postTocInner) {
       var collapseTimer;

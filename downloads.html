@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="top" class="no-js overflow-x-hidden scroll-smooth" lang="en-US">
+<html class="no-js overflow-x-hidden scroll-smooth" lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Inference_Sans.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="assets/fonts/ObjectSans-Regular.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="assets/fonts/ObjectSans-Medium.woff2" as="font" type="font/woff2">
+  <link rel="icon" href="assets/images/logo-lm.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/tailwind-generated.css">
   <link rel="stylesheet" href="assets/css/shared.css">
-  <script src="assets/tailwind.js"></script>
-  <script src="assets/js/tailwind-config.js"></script>
 
   <style>
-    html.dark header a[href="index.html#top"] img { filter:brightness(0) invert(1); }
+    html.dark header a[href="index.html#brand-guidelines"] img { filter:brightness(0) invert(1); }
 
     /* Password gate */
     #pw-gate { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:#fff; padding:24px; }
@@ -64,7 +67,7 @@
   <header class="fixed left-0 right-0 top-0 z-50 h-header border-b border-gray-300 bg-white/95 backdrop-blur">
     <div class="container-fluid h-full">
       <div class="h-full flex items-center justify-between gap-6">
-        <a class="flex items-baseline gap-5 shrink-0" href="index.html#top">
+        <a class="flex items-baseline gap-5 shrink-0" href="index.html#brand-guidelines">
           <img width="48" height="24" src="assets/images/logos/lm-logomark-red.svg" alt="Lightmatter">
         </a>
         <nav class="hidden md:flex xl:hidden items-center gap-4" aria-label="Sections">
@@ -107,7 +110,7 @@
 
   <!-- ── TOC rail ──────────────────────────────────────────────────────────── -->
   <aside id="toc-rail" class="post-toc-wrap hidden xl:block fixed -translate-y-1/2 z-40">
-    <div class="post-toc-inner toc-collapsed font-sans opacity-0 transition-opacity duration-200">
+    <div class="post-toc-inner toc-collapsed font-sans">
       <ul class="toc-list flex flex-col gap-2">
         <!-- Hero -->
         <li class="toc-group flex flex-col">
@@ -379,8 +382,7 @@
   </main>
 
   <footer class="bg-gray-900 text-white">
-    <div class="container-fluid py-16 flex flex-col gap-8">
-      <a href="index.html#top" class="block w-[56px]"><img src="assets/images/logos/lm-logomark-white.png" alt="Lightmatter" width="56" height="28"></a>
+    <div class="container-fluid py-16">
       <p class="text-sm text-gray-500">&copy; 2026 Lightmatter</p>
     </div>
   </footer>
