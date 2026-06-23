@@ -230,11 +230,10 @@
 	    .icon-grid > div > div:last-child > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 	    .icon-copy { cursor:pointer; }
 	    .icon-copy:focus-visible { outline:2px solid #FF3300; outline-offset:-2px; }
-	    #voice-pillars [data-pillar] { transition: opacity 0.2s ease; }
-    #voice-pillars.pillar-hover [data-pillar] { opacity: 0.2; }
-    #voice-pillars.pillar-hover [data-pillar].pillar-active { opacity: 1; }
-
-    .voice-highlight { color:#111; cursor:pointer; transition:color .15s ease; }
+	    .voice-highlight { color:#111; cursor:pointer; transition:color .15s ease, opacity .15s ease; }
+    [data-voice-trigger] { transition: opacity .15s ease; }
+    #voice-example.voice-active .voice-highlight:not(.is-highlighted) { opacity: 0.15; }
+    #voice-example.voice-active [data-voice-trigger]:not(.is-highlighted) { opacity: 0.15; }
 	    .voice-highlight:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
 	    .voice-highlight[data-voice="daring"]:hover,
 	    .voice-highlight[data-voice="daring"]:focus-visible,
@@ -1211,22 +1210,22 @@
         </div>
 
         <div id="voice-pillars">
-          <div data-pillar="daring" class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
             <h3 class="font-sans text-[25px] font-medium leading-[1.2] tracking-[0]">Daring</h3>
             <p class="font-sans text-[25px] leading-[1.4] tracking-[0]">Bold<br>Confident<br>Aspirational</p>
             <p class="text-[20px] leading-[1.45] max-w-[720px]">As befits a brand pushing a paradigm shift in technology, our personality reflects vision and dedication. We harness this daring across the brand, from visual expression to verbal expression.</p>
           </div>
-          <div data-pillar="playful" class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
             <h3 class="font-sans text-[25px] font-medium leading-[1.2] tracking-[0]">Playful</h3>
             <p class="font-sans text-[25px] leading-[1.4] tracking-[0]">Clever<br>Witty<br>Fun</p>
             <p class="text-[20px] leading-[1.45] max-w-[720px]">Levity helps us stand out in a category focused on changing the world. Our brand can be clever, witty, and fun when the situation allows. We are committed to enjoying the journey.</p>
           </div>
-          <div data-pillar="optimistic" class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
             <h3 class="font-sans text-[25px] font-medium leading-[1.2] tracking-[0]">Optimistic</h3>
             <p class="font-sans text-[25px] leading-[1.4] tracking-[0]">Enthusiastic<br>Earnest<br>Warm</p>
             <p class="text-[20px] leading-[1.45] max-w-[720px]">Our work includes setbacks and challenges. Optimism helps us push through them. It keeps the vision elevated beyond application and focused on human progress.</p>
           </div>
-          <div data-pillar="smart" class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
+          <div class="grid grid-cols-1 md:grid-cols-[180px_1fr_2fr] gap-4 md:gap-10 border-b border-gray-300 py-8 md:py-10">
             <h3 class="font-sans text-[25px] font-medium leading-[1.2] tracking-[0]">Smart</h3>
             <p class="font-sans text-[25px] leading-[1.4] tracking-[0]">Bright<br>Intellectual<br>Thoughtful</p>
             <p class="text-[20px] leading-[1.45] max-w-[720px]">We are experts in the field, and our work should reflect it. But expertise is not enough. We share knowledge in a way that feels enriching and as fascinating as the breakthroughs themselves.</p>
@@ -1548,12 +1547,21 @@
       viewObserver.observe(card);
     });
 
-    // Voice example highlights reveal by hovering the legend or the marked phrases.
+    // Voice example: hovering a phrase or trigger label highlights that voice and fades the rest.
     const voiceHighlights = Array.from(document.querySelectorAll('.voice-highlight'));
+    const voiceTriggers = Array.from(document.querySelectorAll('[data-voice-trigger]'));
+    const voiceExample = document.getElementById('voice-example');
     function setVoiceHighlight(voice, active) {
       voiceHighlights.forEach(function (span) {
         if (span.dataset.voice === voice) span.classList.toggle('is-highlighted', active);
       });
+      voiceTriggers.forEach(function (t) {
+        if (t.dataset.voiceTrigger === voice) t.classList.toggle('is-highlighted', active);
+      });
+      if (voiceExample) {
+        var anyActive = voiceHighlights.some(function (s) { return s.classList.contains('is-highlighted'); });
+        voiceExample.classList.toggle('voice-active', anyActive);
+      }
     }
     voiceHighlights.forEach(function (span) {
       function on() { setVoiceHighlight(span.dataset.voice, true); }
@@ -1563,7 +1571,7 @@
       span.addEventListener('focus', on);
       span.addEventListener('blur', off);
     });
-    document.querySelectorAll('[data-voice-trigger]').forEach(function (trigger) {
+    voiceTriggers.forEach(function (trigger) {
       function on() { setVoiceHighlight(trigger.dataset.voiceTrigger, true); }
       function off() { setVoiceHighlight(trigger.dataset.voiceTrigger, false); }
       trigger.addEventListener('mouseenter', on);
@@ -1571,24 +1579,6 @@
       trigger.addEventListener('focus', on);
       trigger.addEventListener('blur', off);
     });
-
-    // Voice pillars: hovering a row fades the others.
-    (function () {
-      var container = document.getElementById('voice-pillars');
-      if (!container) return;
-      var rows = Array.from(container.querySelectorAll('[data-pillar]'));
-      rows.forEach(function (row) {
-        row.addEventListener('mouseenter', function () {
-          container.classList.add('pillar-hover');
-          rows.forEach(function (r) { r.classList.remove('pillar-active'); });
-          row.classList.add('pillar-active');
-        });
-      });
-      container.addEventListener('mouseleave', function () {
-        container.classList.remove('pillar-hover');
-        rows.forEach(function (r) { r.classList.remove('pillar-active'); });
-      });
-    })();
 
     // Product wordmarks: each card toggles itself between plain and registered (®) artwork.
     document.querySelectorAll('.logo-card').forEach(function (card) {
