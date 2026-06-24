@@ -8,6 +8,8 @@
 @media (min-width:1280px){ .container-fluid{ padding-left:220px; padding-right:182px; } }
 
 .nav-link { font-size:13px; letter-spacing:0.02em; line-height:1; color:#000; text-decoration:none; transition:color .15s; }
+.dark-toggle-btn { color:#000000; transition:color .15s; }
+html.dark .dark-toggle-btn { color:#FFFFFF; }
 .nav-link:hover { color:#FF3300; }
 .nav-link.active { color:#FF3300; }
 
