@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/css/shared.css">
 
   <style>
-    .h4 { font-family:'Object Sans',sans-serif; font-size:20px; font-weight:500; line-height:1.1; letter-spacing:0; color:#111; }
+    .h4 { font-family:'Object Sans',sans-serif; font-size:20px; font-weight:500; line-height:1.1; letter-spacing:0; color:#000000; }
     .stylistic-alt { font-feature-settings:'ss01' 1; }
     .logo-toggle:hover { color:#FF3300; }
     .logo-toggle.active { text-decoration:underline; text-underline-offset:3px; }
@@ -29,7 +29,7 @@
     .icon-copy { cursor:pointer; }
     .icon-copy:focus-visible { outline:2px solid #FF3300; outline-offset:-2px; }
 
-    .voice-highlight { color:#111; cursor:pointer; transition:color .15s ease; }
+    .voice-highlight { color:#000000; cursor:pointer; transition:color .15s ease; }
     .voice-highlight:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
     .voice-highlight[data-voice="daring"]:hover,
     .voice-highlight[data-voice="daring"]:focus-visible,
@@ -51,14 +51,14 @@
     html.dark #attribution-copy       { color:#fff; border-color:#fff; }
     html.dark #attribution-copy:hover { background-color:#fff; color:#000; }
     html.dark header a[href="#brand-guidelines"] img { filter:brightness(0) invert(1); }
-    html.dark .h4              { color:#e5e5e5; }
-    html.dark .voice-highlight { color:#ccc; }
+    html.dark .h4              { color:#EEEEEE; }
+    html.dark .voice-highlight { color:#D4D4D4; }
     html.dark .icon-grid img   { filter:invert(1); }
     html.dark #logo-scale img  { filter:invert(1); }
     html.dark #logo-scale .border-red-500 { border-color:#FF3300 !important; }
     html.dark #logos .bg-gray-900    { background-color:#0d0d0d !important; }
     html.dark #logos .border-gray-700 { border-color:#1e1e1e; }
-    html.dark .logo-toggle     { color:#666; }
+    html.dark .logo-toggle     { color:#BBBBBB; }
     html.dark .logo-toggle:hover { color:#FF3300; }
     html.dark .logo-toggle.active { text-decoration:underline; text-underline-offset:3px; }
   </style>
@@ -292,7 +292,7 @@
       </ul>
       <button onclick="toggleDarkMode()"
               class="dark-toggle-btn mt-5 flex items-center gap-1.5 hover:text-red-500 transition-colors"
-              style="color:#7a7a7a;font-size:12px;line-height:1;cursor:pointer;"
+              style="color:#000000;font-size:12px;line-height:1;cursor:pointer;"
               aria-label="Switch to dark mode">
         <svg class="dark-toggle-moon w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -712,7 +712,7 @@
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#BBBBBB"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 400 <span class="text-red-500">*</span></p><button type="button" data-copy="BBBBBB" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">BBBBBB</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#757575"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 500</p><button type="button" data-copy="757575" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">757575</button></div></div>
                 <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#333333"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 600</p><button type="button" data-copy="333333" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">333333</button></div></div>
-                <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#111111"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 700</p><button type="button" data-copy="111111" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">111111</button></div></div>
+                <div class="flex flex-col border border-gray-300 bg-white"><div class="h-14 md:h-16" style="background:#000000111"></div><div class="px-2 py-1.5 border-t border-gray-200"><p class="text-xs font-medium text-gray-900 leading-tight">Grey 700</p><button type="button" data-copy="111111" onclick="copyVal(this)" class="block w-full text-left text-xs text-gray-500 hover:text-red-500 transition-colors">111111</button></div></div>
               </div>
             </div>
             <div class="flex flex-col gap-2">
