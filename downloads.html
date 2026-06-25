@@ -391,11 +391,8 @@
   <script src="assets/js/shared.js"></script>
   <script>
     // ── Password gate ─────────────────────────────────────────────────────
-    // NOTE: this is a light deterrent, not real security — the password lives
-    // in the page and a determined visitor can bypass it. To change it, edit
-    // the PASSWORD value below.
     (function () {
-      var PASSWORD = 'Lightmatter!';            // ← set the download password here
+      var PASSWORD = 'Lightmatter!';
       var KEY = 'lm-downloads-auth';
       var gate  = document.getElementById('pw-gate');
       var form  = document.getElementById('pw-form');
